@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.liuzw.generate.mapper.ColumnMapper">
+
+	<resultMap id="BaseResultMap" type="com.liuzw.generate.bean.Column">
+		<id column="COLUMN_NAME" jdbcType="VARCHAR" property="columnName" />
+		<id column="COMMENTS" jdbcType="VARCHAR" property="columnCname" />
+		<id column="DATA_TYPE" jdbcType="VARCHAR" property="dataType" />
+		<id column="DATA_LENGTH" jdbcType="VARCHAR" property="dataLength" />
+	</resultMap>
+
+	<select id="getTableAllColumns" parameterType="map" resultMap="BaseResultMap">
+        <choose>
+			<when test="dataBaseType == 'mysql'">
+				SELECT COLUMN_NAME,DATA_TYPE,COLUMN_COMMENT AS COMMENTS,
+				CASE WHEN CHARACTER_MAXIMUM_LENGTH > 9999 THEN 9999
+				ELSE CHARACTER_MAXIMUM_LENGTH END AS DATA_LENGTH
+				FROM INFORMATION_SCHEMA.COLUMNS
+				WHERE UPPER(TABLE_NAME) = UPPER(#{tableName,jdbcType=VARCHAR})
+				AND UPPER(TABLE_SCHEMA) = UPPER(#{dataBaseName,jdbcType=VARCHAR})
+				ORDER BY ORDINAL_POSITION
+			</when>
+			<otherwise>
+				SELECT Y1.COLUMN_NAME,Y1.DATA_TYPE,Y2.COMMENTS,Y1.DATA_LENGTH
+				FROM ALL_TAB_COLUMNS Y1,ALL_COL_COMMENTS Y2
+				WHERE Y1.OWNER =  #{dataBaseName,jdbcType=VARCHAR}
+				AND Y1.TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+				AND Y1.COLUMN_NAME = Y2.COLUMN_NAME
+				AND Y1.TABLE_NAME = Y2.TABLE_NAME
+				ORDER BY Y1.COLUMN_ID
+			</otherwise>
+		</choose>
+
+	</select>
+
+	<select id="getTablePkColumns" parameterType="map" resultMap="BaseResultMap">
+		<choose>
+			<when test="dataBaseType == 'mysql'">
+				SELECT COLUMN_NAME,DATA_TYPE,COLUMN_COMMENT AS COMMENTS,
+				CASE WHEN CHARACTER_MAXIMUM_LENGTH > 9999 THEN 9999 ELSE CHARACTER_MAXIMUM_LENGTH END AS DATA_LENGTH
+				FROM INFORMATION_SCHEMA.COLUMNS
+				WHERE UPPER(TABLE_NAME) = UPPER(#{tableName,jdbcType=VARCHAR})
+				AND UPPER(TABLE_SCHEMA) = UPPER(#{dataBaseName,jdbcType=VARCHAR})
+				AND COLUMN_KEY='PRI'
+				ORDER BY ORDINAL_POSITION
+			</when>
+			<otherwise>
+				SELECT Y1.COLUMN_NAME,Y1.DATA_TYPE,Y2.COMMENTS,Y1.DATA_LENGTH
+				FROM ALL_TAB_COLUMNS Y1,ALL_COL_COMMENTS Y2,
+				(SELECT A.CONSTRAINT_NAME, A.COLUMN_NAME, B.CONSTRAINT_TYPE
+				FROM USER_CONS_COLUMNS A, USER_CONSTRAINTS B
+				WHERE A.CONSTRAINT_NAME = B.CONSTRAINT_NAME
+				AND B.CONSTRAINT_TYPE = 'P'
+				AND A.TABLE_NAME = #{tableName,jdbcType=VARCHAR}) Y3
+				WHERE Y1.OWNER = #{dataBaseName,jdbcType=VARCHAR}
+				AND Y1.TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+				AND Y1.COLUMN_NAME = Y2.COLUMN_NAME
+				AND Y1.COLUMN_NAME=Y3.COLUMN_NAME
+				AND Y1.TABLE_NAME = Y2.TABLE_NAME
+				ORDER BY Y1.COLUMN_ID
+			</otherwise>
+		</choose>
+	</select>
+
+</mapper> 
