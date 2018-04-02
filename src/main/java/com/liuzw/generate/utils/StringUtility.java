@@ -4,7 +4,9 @@ package com.liuzw.generate.utils;
 
 import java.util.StringTokenizer;
 
-
+/**
+ * @author liuzw
+ */
 public class StringUtility {
 
 
