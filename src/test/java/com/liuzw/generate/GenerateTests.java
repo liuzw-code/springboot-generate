@@ -47,7 +47,7 @@ public class GenerateTests {
 
 	@Test
 	public void generateAll(){
-		String tableNames = "t_push_message";
+		String tableNames = "t_user_address";
 		generateService.generateAll(tableNames);
 	}
 

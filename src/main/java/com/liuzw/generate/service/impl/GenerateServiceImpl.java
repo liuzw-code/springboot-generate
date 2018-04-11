@@ -1,13 +1,13 @@
 package com.liuzw.generate.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.liuzw.generate.bean.BasicData;
 import com.liuzw.generate.bean.Column;
+import com.liuzw.generate.bean.BasicData;
 import com.liuzw.generate.mapper.ColumnMapper;
 import com.liuzw.generate.service.IGenerateService;
 import com.liuzw.generate.utils.JavaTypeUtils;
 import com.liuzw.generate.utils.JdbcTypeUtils;
-import com.liuzw.generate.utils.StringUtility;
+import com.liuzw.generate.utils.StringUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -83,13 +83,8 @@ public class GenerateServiceImpl implements IGenerateService {
     private ColumnMapper columnMapper;
 
     @Override
-    public void generateDto(String tableNames) {
-        generate(tableNames,"dto.ftl",".java","/dto");
-    }
-
-    @Override
-    public void generateModel(String tableNames) {
-        generate(tableNames,"model.ftl",".java","/model");
+    public void generateEntity(String tableNames) {
+        generate(tableNames,"entity.ftl",".java","/bean");
     }
 
 
@@ -103,18 +98,17 @@ public class GenerateServiceImpl implements IGenerateService {
     }
     @Override
     public void generateDao(String tableNames) {
-        generate(tableNames,"dao.ftl","Dao.java","/mapper");
+        generate(tableNames,"dao.ftl","Mapper.java","/mapper");
     }
 
     @Override
     public void generateMapper(String tableNames) {
-       generate(tableNames,"mapper.ftl","Dao.xml","/mapper");
+       generate(tableNames,"mapper.ftl","Mapper.xml","/mapper");
     }
 
     @Override
     public void generateAll(String tableNames) {
-        generateDto(tableNames);
-        generateModel(tableNames);
+        generateEntity(tableNames);
         generateService(tableNames);
         generateServiceImpl(tableNames);
         generateDao(tableNames);
@@ -152,11 +146,11 @@ public class GenerateServiceImpl implements IGenerateService {
 
                 for (String table : tableNames) {
                     basicData.setTableName(table.toLowerCase());
-                    String name = StringUtility.getCamelCaseString(table.toLowerCase(), true);
+                    String name = StringUtil.getCamelCaseString(table.toLowerCase(), true, true);
                     basicData.setVarName(name);
                     basicData.setClassName(name);
                     //输出的文件名
-                    String outFileName = StringUtility.getCamelCaseString(table.toLowerCase(), true) + suffix;
+                    String outFileName = name + suffix;
 
                     if (StringUtils.isEmpty(filePath)) {
                         filePath = getPath();
@@ -265,7 +259,7 @@ public class GenerateServiceImpl implements IGenerateService {
             column.setColumnName(column.getColumnName().toLowerCase());
             column.setJdbcType(JdbcTypeUtils.readValue(column.getDataType().toUpperCase()));
             column.setPropertyType(JavaTypeUtils.readValue(column.getDataType().toUpperCase()));
-            column.setPropertyName(StringUtility.getCamelCaseString(column.getColumnName(),false));
+            column.setPropertyName(StringUtil.getCamelCaseString(column.getColumnName(),false, false));
             column.setPropertyCname(column.getColumnCname());
             column.setColumnCname(column.getColumnName());
         }

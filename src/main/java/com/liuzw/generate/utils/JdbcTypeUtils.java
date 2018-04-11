@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * @author 刘泽伟
+ * @author liuzw
  */
 public class JdbcTypeUtils {
 	private static Properties config;

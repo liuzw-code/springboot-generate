@@ -1,19 +1,18 @@
 package ${data.packagePath}.${data.module}.service.impl;
 
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import ${data.packagePath}.${data.module}.dao.${data.className}Dao;
-import ${data.packagePath}.${data.module}.model.${data.className};
+import ${data.packagePath}.${data.module}.dao.${data.className}Mapper;
+import ${data.packagePath}.${data.module}.bean.${data.className};
 import ${data.packagePath}.${data.module}.service.${data.className}Service;
 
 /**
  *  ${data.className}ServiceImpl
  *
+ * @author liuzw
  */
  <#--一般一个表就定义一个主键,如果属性值存在,就是下标为0的值,不存在就是空值-->
  <#assign pkProperty=data.pkColumns[0].propertyName!"">
@@ -42,8 +41,8 @@ public class ${data.className}ServiceImpl  implements ${data.className}Service {
 	}
 
 	@Override
-	public void updateByPrimaryKeySelective(${data.className} ${data.varName}) {
-		${data.varName}Mapper.updateByPrimaryKeySelective(${data.varName});
+	public void updateSelectiveById(${data.className} ${data.varName}) {
+		${data.varName}Mapper.updateSelectiveById(${data.varName});
 		
 	}
 
@@ -54,8 +53,8 @@ public class ${data.className}ServiceImpl  implements ${data.className}Service {
 	}
 
 	@Override
-	public ${data.className} selectByPrimaryKey(${pkPropertyType} ${pkProperty}) {
-		return ${data.varName}Mapper.selectByPrimaryKey(${pkProperty});
+	public ${data.className} findById(${pkPropertyType} ${pkProperty}) {
+		return ${data.varName}Mapper.findById(${pkProperty});
 	}
 
 }

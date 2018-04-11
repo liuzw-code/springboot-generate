@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author 刘泽伟
+ * @author liuzw
  */
 @RestController
 @RequestMapping("generate")
@@ -16,12 +16,13 @@ public class GenerateController {
 	@Autowired
 	private IGenerateService generateService;
 
+
 	/**
 	 * 生成实体类
 	 *
 	 */
-	@RequestMapping("generateEntity")
-	public void generateEntity(String tableNames) {
+	@RequestMapping("generateModel")
+	public void generateModel(String tableNames) {
 		generateService.generateEntity(tableNames);
 	}
 

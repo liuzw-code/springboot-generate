@@ -14,14 +14,7 @@ public interface IGenerateService {
      *
      * @param tableNames 表名
      */
-    void generateDto(String tableNames);
-
-    /**
-     * 生成实体类
-     *
-     * @param tableNames 表名
-     */
-    void generateModel(String tableNames);
+    void generateEntity(String tableNames);
 
     /**
      * 生成Servicr类

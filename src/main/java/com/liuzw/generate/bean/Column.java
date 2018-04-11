@@ -1,15 +1,12 @@
 package com.liuzw.generate.bean;
 
-import com.liuzw.generate.utils.JavaTypeUtils;
-import com.liuzw.generate.utils.JdbcTypeUtils;
-import com.liuzw.generate.utils.StringUtility;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 刘泽伟
+ * @author liuzw
  */
 @Data
 @Builder

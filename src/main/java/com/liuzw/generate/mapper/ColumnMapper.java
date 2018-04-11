@@ -11,16 +11,18 @@ import java.util.Map;
 public interface ColumnMapper {
 	
 	/**
-	 * params 中需要传入 dataBaseName 和 tableName
-	 * @param params
-	 * @return
+	 * 获取表的所有字段
+	 *
+	 * @param params 需要传入 dataBaseName 和 tableName
+	 * @return       List<Column>
 	 */
 	 List<Column> getTableAllColumns(Map<String, String> params);
 
 	/**
-	 * params 中需要传入 dataBaseName 和 tableName
-	 * @param params
-	 * @return
+	 * 获取表的主键
+	 *
+	 * @param params 需要传入 dataBaseName 和 tableName
+	 * @return       List<Column>
 	 */
 	 List<Column> getTablePkColumns(Map<String, String> params);
 	
