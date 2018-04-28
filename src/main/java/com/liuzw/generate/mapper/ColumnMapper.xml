@@ -3,18 +3,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.liuzw.generate.mapper.ColumnMapper">
-
 	<resultMap id="BaseResultMap" type="com.liuzw.generate.bean.Column">
 		<id column="COLUMN_NAME" jdbcType="VARCHAR" property="columnName" />
 		<id column="COMMENTS" jdbcType="VARCHAR" property="columnCname" />
 		<id column="DATA_TYPE" jdbcType="VARCHAR" property="dataType" />
 		<id column="DATA_LENGTH" jdbcType="VARCHAR" property="dataLength" />
+		<id column="IS_NULLABLE" jdbcType="VARCHAR" property="isNullable" />
 	</resultMap>
 
 	<select id="getTableAllColumns" parameterType="map" resultMap="BaseResultMap">
-        <choose>
+		<choose>
 			<when test="dataBaseType == 'mysql'">
-				SELECT COLUMN_NAME,DATA_TYPE,COLUMN_COMMENT AS COMMENTS,
+				SELECT COLUMN_NAME,DATA_TYPE,COLUMN_COMMENT AS COMMENTS,IS_NULLABLE,
 				CASE WHEN CHARACTER_MAXIMUM_LENGTH > 9999 THEN 9999
 				ELSE CHARACTER_MAXIMUM_LENGTH END AS DATA_LENGTH
 				FROM INFORMATION_SCHEMA.COLUMNS
@@ -62,6 +62,25 @@
 				ORDER BY Y1.COLUMN_ID
 			</otherwise>
 		</choose>
+	</select>
+
+	<select id="queryList" resultType="com.liuzw.generate.bean.Table">
+		select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables
+		where table_schema = (select database())
+		<if test="tableName != null and tableName.trim() != ''">
+			and table_name like concat('%', #{tableName}, '%')
+		</if>
+		order by create_time desc
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from information_schema.tables where table_schema = (select database())
+		<if test="tableName != null and tableName.trim() != ''">
+			and table_name like concat('%', #{tableName}, '%')
+		</if>
 	</select>
 
 </mapper> 

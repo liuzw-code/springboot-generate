@@ -1,24 +1,28 @@
 package com.liuzw.generate.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.liuzw.generate.bean.Column;
 import com.liuzw.generate.bean.BasicData;
+import com.liuzw.generate.bean.Column;
+import com.liuzw.generate.bean.Query;
+import com.liuzw.generate.bean.Table;
 import com.liuzw.generate.mapper.ColumnMapper;
 import com.liuzw.generate.service.IGenerateService;
 import com.liuzw.generate.utils.JavaTypeUtils;
 import com.liuzw.generate.utils.JdbcTypeUtils;
 import com.liuzw.generate.utils.StringUtil;
+import com.liuzw.generate.utils.ZipUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -83,10 +87,14 @@ public class GenerateServiceImpl implements IGenerateService {
     private ColumnMapper columnMapper;
 
     @Override
+    public void generateController(String tableNames) {
+        generate(tableNames,"controller.ftl","Controller.java","/controller");
+    }
+
+    @Override
     public void generateEntity(String tableNames) {
         generate(tableNames,"entity.ftl",".java","/bean");
     }
-
 
     @Override
     public void generateService(String tableNames) {
@@ -103,16 +111,64 @@ public class GenerateServiceImpl implements IGenerateService {
 
     @Override
     public void generateMapper(String tableNames) {
-       generate(tableNames,"mapper.ftl","Mapper.xml","/mapper");
+        generate(tableNames,"mapper.ftl","Mapper.xml","/mapper");
+    }
+
+    @Override
+    public void generateVue(String tableNames) {
+        generate(tableNames,"vue.ftl",".vue","/vue");
+    }
+
+    @Override
+    public void generateJs(String tableNames) {
+        generate(tableNames,"js.ftl",".txt","/js");
+    }
+
+    @Override
+    public void generateMenuSql(String tableNames) {
+        generate(tableNames,"menuSql.ftl",".txt","/sql");
     }
 
     @Override
     public void generateAll(String tableNames) {
+       // generateController(tableNames);
         generateEntity(tableNames);
         generateService(tableNames);
         generateServiceImpl(tableNames);
         generateDao(tableNames);
         generateMapper(tableNames);
+        //generateVue(tableNames);
+        //generateMenuSql(tableNames);
+        //generateJs(tableNames);
+    }
+
+    @Override
+    public void generatorAll(HttpServletResponse response, String tableNames) {
+        generateAll(tableNames);
+        try {
+            ZipUtils.toZip(filePath, response.getOutputStream(), true);
+            ZipUtils.deleteDir(new File(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    @Override
+    public List<Table> queryList(Query query) {
+        return columnMapper.queryList(query);
+    }
+
+    @Override
+    public Integer queryTotal(Query query) {
+        return columnMapper.queryTotal(query);
+    }
+
+    @Override
+    public void generatorCode(String tableNames, String path) {
+        filePath = path;
+        generateAll(tableNames);
     }
 
 
@@ -126,7 +182,7 @@ public class GenerateServiceImpl implements IGenerateService {
     private void generate(String tableName, String templateName, String suffix, String filepath){
 
         if (StringUtils.isNotEmpty(tableName) && StringUtils.isNotEmpty(templateName)
-               && StringUtils.isNotEmpty(suffix) && StringUtils.isNotEmpty(filepath)) {
+                && StringUtils.isNotEmpty(suffix) && StringUtils.isNotEmpty(filepath)) {
             try {
                 String[] tableNames = tableName.split(",");
 
@@ -147,7 +203,7 @@ public class GenerateServiceImpl implements IGenerateService {
                 for (String table : tableNames) {
                     basicData.setTableName(table.toLowerCase());
                     String name = StringUtil.getCamelCaseString(table.toLowerCase(), true, true);
-                    basicData.setVarName(name);
+                    basicData.setVarName(StringUtil.getCamelCaseString(table.toLowerCase(), false, true));
                     basicData.setClassName(name);
                     //输出的文件名
                     String outFileName = name + suffix;
@@ -222,7 +278,7 @@ public class GenerateServiceImpl implements IGenerateService {
             File fn  =  new File(f.getPath()  +  "\\"  +  outFileName);
             logger.info("======================:" + f.getPath()  +  "\\"  +  outFileName);
             if (!fn.exists()) {
-               fn.createNewFile();
+                fn.createNewFile();
             }
             FileOutputStream fos  =  new FileOutputStream(fn);
 
@@ -254,12 +310,13 @@ public class GenerateServiceImpl implements IGenerateService {
         return file.getPath();
     }
 
+
     private void getList(List<Column> list){
         for (Column column : list) {
             column.setColumnName(column.getColumnName().toLowerCase());
             column.setJdbcType(JdbcTypeUtils.readValue(column.getDataType().toUpperCase()));
             column.setPropertyType(JavaTypeUtils.readValue(column.getDataType().toUpperCase()));
-            column.setPropertyName(StringUtil.getCamelCaseString(column.getColumnName(),false, false));
+            column.setPropertyName(StringUtil.getCamelCaseString(column.getColumnName(),false,false));
             column.setPropertyCname(column.getColumnCname());
             column.setColumnCname(column.getColumnName());
         }

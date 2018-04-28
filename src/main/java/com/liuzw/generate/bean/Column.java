@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Column {
-	
+
+
 	/**
 	 * 字段名称
 	 */
@@ -46,5 +47,10 @@ public class Column {
 	 * 字段类型
 	 */
 	private String jdbcType;
+
+	/**
+	 * 是否必填
+	 */
+	private String isNullable;
 
 }

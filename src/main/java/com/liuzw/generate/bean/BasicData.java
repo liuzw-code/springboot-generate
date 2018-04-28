@@ -61,5 +61,4 @@ public class BasicData {
 	 */
 	private String dataBaseType;
 
-
 }
