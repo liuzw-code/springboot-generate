@@ -315,7 +315,7 @@ public class GenerateServiceImpl implements IGenerateService {
         for (Column column : list) {
             column.setColumnName(column.getColumnName().toLowerCase());
             column.setJdbcType(JdbcTypeUtils.readValue(column.getDataType().toUpperCase()));
-            column.setPropertyType(JavaTypeUtils.readValue(column.getDataType().toUpperCase()));
+            column.setPropertyType(JavaTypeUtils.readValue(column.getJdbcType().toUpperCase()));
             column.setPropertyName(StringUtil.getCamelCaseString(column.getColumnName(),false,false));
             column.setPropertyCname(column.getColumnCname());
             column.setColumnCname(column.getColumnName());
