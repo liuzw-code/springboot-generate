@@ -271,15 +271,17 @@ public class GenerateServiceImpl implements IGenerateService {
 
     private void generate(Template temp,String outFileName, String outdir){
         try {
+            Boolean flag = true;
             File f  =  new File(outdir);
             if (!f.exists()) {
-                f.mkdirs();
+                flag = f.mkdirs();
             }
             File fn  =  new File(f.getPath()  +  "\\"  +  outFileName);
             logger.info("======================:" + f.getPath()  +  "\\"  +  outFileName);
             if (!fn.exists()) {
-                fn.createNewFile();
+                flag = fn.createNewFile();
             }
+            System.out.println(flag);
             FileOutputStream fos  =  new FileOutputStream(fn);
 
             Writer out  =  new OutputStreamWriter(fos);
@@ -289,9 +291,7 @@ public class GenerateServiceImpl implements IGenerateService {
             temp.process(root, out);
             out.flush();
             out.close();
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -305,7 +305,7 @@ public class GenerateServiceImpl implements IGenerateService {
         String path = System.getProperty("user.dir") + "/out/";
         File file  =  new File(path);
         if (file.exists()) {
-            file.delete();
+            System.out.println(file.delete());
         }
         return file.getPath();
     }

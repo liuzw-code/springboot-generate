@@ -18,7 +18,7 @@ import java.util.List;
  <#assign pkProperty=data.pkColumns[0].propertyName!"">
  <#assign pkPropertyType=data.pkColumns[0].propertyType!"">
 @Service
-public class ${data.className}ServiceImpl  implements ${data.className}Service {
+public class ${data.className}ServiceImpl implements ${data.className}Service {
 		
 		
 	@Autowired
