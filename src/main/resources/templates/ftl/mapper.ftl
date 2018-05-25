@@ -39,7 +39,7 @@
     </sql>
 
 
-    <insert id="insert" parameterType="${data.packagePath}.${data.module}.bean.${data.className}">
+    <insert id="insert" parameterType="${data.packagePath}.${data.module}.bean.${data.className}" useGeneratedKeys="true" keyProperty="${pkProperty}">
         insert into ${data.tableName}(
          <#list data.columns as c>
              ${c.columnName}<#if c_has_next>,</#if>
