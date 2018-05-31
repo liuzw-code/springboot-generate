@@ -29,6 +29,13 @@ public interface IGenerateService {
     void generateEntity(String tableNames);
 
     /**
+     * 生成实体类
+     *
+     * @param tableNames 表名
+     */
+    void generateModel(String tableNames);
+
+    /**
      * 生成Servicr类
      *
      * @param tableNames 表名

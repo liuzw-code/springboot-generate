@@ -49,7 +49,6 @@ public class ${data.className}Controller extends BaseController {
      @ApiOperation(value = "查询指定数据", notes = "查询指定数据")
      @ApiImplicitParams({@ApiImplicitParam(name = "${pkProperty}", value = "数据Id", paramType = "query", dataType = "${pkPropertyType}")})
      @GetMapping(value = "/${data.varName}/query",  produces = MediaType.APPLICATION_JSON_VALUE)
-     @RequestProcess(popedomCode = "mpys:${data.varName}", popedomType = PopedomType.View)
      public ResultData<${data.className}ResDto> query(Long id) {
         return ResultData.createQuerySuccessResult(CopyDataUtil.copyObject(${data.varName}Service.getById(idDto.getId()), ${data.className}ResDto.class));
      }
@@ -63,7 +62,6 @@ public class ${data.className}Controller extends BaseController {
      */
      @ApiOperation(value = "增加数据", notes = "增加数据")
      @PostMapping(value = "/${data.varName}/add",  produces = MediaType.APPLICATION_JSON_VALUE)
-     @RequestProcess(popedomCode = "mpys:${data.varName}", popedomType = PopedomType.Insert, saveResult = true)
      public ResultData<${data.className}ReqDto> insert(@Valid @RequestBody ${data.className}ReqDto dto) {
         return ResultData.createAddResult(${data.varName}Service.insert(dto), dto);
      }
@@ -76,7 +74,6 @@ public class ${data.className}Controller extends BaseController {
      */
      @ApiOperation(value = "更新数据", notes = "更新数据")
      @PostMapping(value = "/${data.varName}/edit",  produces = MediaType.APPLICATION_JSON_VALUE)
-     @RequestProcess(popedomCode = "mpys:${data.varName}", popedomType = PopedomType.Update, saveResult = true)
      public ResultData<${data.className}ReqDto> update(@Validated({MustId.class}) @RequestBody ${data.className}ReqDto dto) {
          return ResultData.createUpdateResult(${data.varName}Service.update(dto), dto);
      }
@@ -90,7 +87,6 @@ public class ${data.className}Controller extends BaseController {
       */
       @ApiOperation(value = "删除数据", notes = "删除数据")
       @PostMapping(value = "/${data.varName}/remove",  produces = MediaType.APPLICATION_JSON_VALUE)
-      @RequestProcess(popedomCode = "mpys:${data.varName}", popedomType = PopedomType.Delete, saveResult = true)
       public ResultData<Void> delete(@RequestBody IdDto idDto) {
          return ResultData.createDeleteResult(${data.varName}Service.delete(idDto.getId()));
       }

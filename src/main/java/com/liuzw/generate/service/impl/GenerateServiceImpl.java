@@ -97,6 +97,11 @@ public class GenerateServiceImpl implements IGenerateService {
     }
 
     @Override
+    public void generateModel(String tableNames) {
+        generate(tableNames,"model.ftl",".java","/model");
+    }
+
+    @Override
     public void generateService(String tableNames) {
         generate(tableNames,"service.ftl","Service.java","/service");
     }
@@ -133,6 +138,7 @@ public class GenerateServiceImpl implements IGenerateService {
     public void generateAll(String tableNames) {
        // generateController(tableNames);
         generateEntity(tableNames);
+        generateModel(tableNames);
         generateService(tableNames);
         generateServiceImpl(tableNames);
         generateDao(tableNames);
