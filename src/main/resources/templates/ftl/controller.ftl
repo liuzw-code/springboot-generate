@@ -1,19 +1,25 @@
 package ${data.packagePath}.${data.module}.controller;
 
 
+
+
+import ${data.packagePath}.${data.module}.bean.Id;
+import ${data.packagePath}.${data.module}.bean.Page;
+import ${data.packagePath}.${data.module}.bean.ResultData;
+import ${data.packagePath}.${data.module}.utils.CopyDataUtil;
 import ${data.packagePath}.${data.module}.bean.${data.className};
 import ${data.packagePath}.${data.module}.service.${data.className}Service;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @author liuzw
- * @version V1.0
  **/
 <#--一般一个表就定义一个主键,如果属性值存在,就是下标为0的值,不存在就是空值-->
 <#assign pkProperty=data.pkColumns[0].propertyName!"">
@@ -21,7 +27,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/${data.varName}")
 @Api(description = "管理")
-@Validated
 public class ${data.className}Controller extends BaseController {
 
     @Autowired
@@ -31,51 +36,53 @@ public class ${data.className}Controller extends BaseController {
     /**
      *  获取所有数据
      *
-     * @param dto  ${data.className}ReqDto
-     * @return     ResultData<PageInfo<${data.className}ResDto>>
+     * @param bean  ${data.className}Bean
+     * @return     ResultData<Page<${data.className}Bean>>
      */
      @ApiOperation(value = "获取数据列表", notes = "获取数据列表")
      @PostMapping(value = "/${data.varName}/list",  produces = MediaType.APPLICATION_JSON_VALUE)
-     public ResultData<PageInfo<${data.className}ResDto>> getList(@Valid @RequestBody ${data.className}QueryDto dto) {
-         return  ResultData.createSuccessResult(convertListByPageInfo(${data.varName}Service.getList(dto), ${data.className}ResDto.class));
+     public ResultData<Page<${data.className}Bean>> getList(@RequestBody ${data.className}QueryBean bean) {
+         return  ResultData.createSelectSuccessResult(convertPageInfo(${data.varName}Service.getList(bean), ${data.className}Bean.class));
      }
 
     /**
      *  获取信息
      *
      * @param ${pkProperty}    主键id
-     * @return     ResultData<${data.className}ResDto>
+     * @return     ResultData<${data.className}Bean>
      */
      @ApiOperation(value = "查询指定数据", notes = "查询指定数据")
-     @ApiImplicitParams({@ApiImplicitParam(name = "${pkProperty}", value = "数据Id", paramType = "query", dataType = "${pkPropertyType}")})
-     @GetMapping(value = "/${data.varName}/query",  produces = MediaType.APPLICATION_JSON_VALUE)
-     public ResultData<${data.className}ResDto> query(Long id) {
-        return ResultData.createQuerySuccessResult(CopyDataUtil.copyObject(${data.varName}Service.getById(idDto.getId()), ${data.className}ResDto.class));
+     @PostMapping(value = "/${data.varName}/getById",  produces = MediaType.APPLICATION_JSON_VALUE)
+     public ResultData<${data.className}Bean> getById(@RequestBody Id id) {
+        if (id.getId() == null) {
+            return ResultData.createErrorResult("id 不能为空");
+        }
+        return ResultData.createSelectSuccessResult(CopyDataUtil.copyObject(${data.varName}Service.getById(id.getId()), ${data.className}Bean.class));
      }
 
 
     /**
      *  添加
      *
-     * @param dto   ${data.className}
-     * @return      ResultData<${data.className}ReqDto>
+     * @param bean   ${data.className}
+     * @return      ResultData<${data.className}Bean>
      */
      @ApiOperation(value = "增加数据", notes = "增加数据")
      @PostMapping(value = "/${data.varName}/add",  produces = MediaType.APPLICATION_JSON_VALUE)
-     public ResultData<${data.className}ReqDto> insert(@Valid @RequestBody ${data.className}ReqDto dto) {
-        return ResultData.createAddResult(${data.varName}Service.insert(dto), dto);
+     public ResultData<${data.className}Bean> insert(@RequestBody ${data.className}Bean bean) {
+        return ResultData.createInsertResult(${data.varName}Service.insert(bean));
      }
 
     /**
      *  更新
      *
-     * @param dto  ${data.className}
-     * @return     ResultData<${data.className}ReqDto>
+     * @param bean  ${data.className}
+     * @return     ResultData<${data.className}Bean>
      */
      @ApiOperation(value = "更新数据", notes = "更新数据")
      @PostMapping(value = "/${data.varName}/edit",  produces = MediaType.APPLICATION_JSON_VALUE)
-     public ResultData<${data.className}ReqDto> update(@Validated({MustId.class}) @RequestBody ${data.className}ReqDto dto) {
-         return ResultData.createUpdateResult(${data.varName}Service.update(dto), dto);
+     public ResultData<${data.className}Bean> update(@RequestBody ${data.className}Bean bean) {
+         return ResultData.createUpdateResult(${data.varName}Service.update(bean));
      }
 
 
@@ -87,8 +94,25 @@ public class ${data.className}Controller extends BaseController {
       */
       @ApiOperation(value = "删除数据", notes = "删除数据")
       @PostMapping(value = "/${data.varName}/remove",  produces = MediaType.APPLICATION_JSON_VALUE)
-      public ResultData<Void> delete(@RequestBody IdDto idDto) {
-         return ResultData.createDeleteResult(${data.varName}Service.delete(idDto.getId()));
+      public ResultData<Void> delete(@RequestBody Id id) {
+         if (id.getId() != null) {
+             return ResultData.createErrorResult("id 不能为空");
+         }
+         return ResultData.createDeleteResult(${data.varName}Service.delete(id.getId()));
       }
 
+       /**
+       *  批量删除
+       *
+       * @param  id     主键id
+       * @return        ResultData<Void>
+       */
+       @ApiOperation(value = "删除数据", notes = "删除数据")
+       @PostMapping(value = "/${data.varName}/batchRemove",  produces = MediaType.APPLICATION_JSON_VALUE)
+       public ResultData<Void> batchRemove(@RequestBody Id ids) {
+          if (StringUtils.isEmpty(ids.getIds())) {
+              return ResultData.createErrorResult("id 不能为空");
+          }
+          return ResultData.createDeleteResult(${data.varName}Service.batchRemove(id.getIds()));
+       }
 }

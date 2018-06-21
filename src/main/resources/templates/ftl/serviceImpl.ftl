@@ -1,13 +1,24 @@
 package ${data.packagePath}.${data.module}.service.impl;
 
 
+
+import com.github.pagehelper.PageHelper;
+import ${data.packagePath}.${data.module}.bean.${data.className}Bean;
+import ${data.packagePath}.${data.module}.bean.${data.className}QueryBean;
+import ${data.packagePath}.${data.module}.model.${data.className}Model;
+import ${data.packagePath}.${data.module}.mapper.${data.className}Mapper;
+import ${data.packagePath}.${data.module}.service.${data.className}Service;
+import com.liuzw.blog.utils.CopyDataUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
-import ${data.packagePath}.${data.module}.bean.${data.className};
-import ${data.packagePath}.${data.module}.dao.${data.className}Mapper;
-import ${data.packagePath}.${data.module}.service.${data.className}Service;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *  ${data.className}ServiceImpl
@@ -25,73 +36,55 @@ public class ${data.className}ServiceImpl implements ${data.className}Service {
 	private ${data.className}Mapper ${data.varName}Mapper;
 
 
-	@Override
-    @Transactional(propagation = Propagation.REQUIRED,
-            rollbackFor = {RuntimeException.class, Exception.class})
-    public Boolean insert(${data.className} ${data.varName}) {
-        return ${data.varName}Mapper.insert(${data.varName}) > 0;
+    @Override
+	public List<${data.className}Model> getList(${data.className}QueryBean bean) {
+        PageHelper.startPage(bean.getPageNum(), bean.getPageSize());
+        Example example = new Example(${data.className}Model.class);
+        Example.Criteria createCriteria = example.createCriteria();
+//        if (StringUtils.isNotEmpty(bean.getTitle())) {
+//            createCriteria.andLike("title", "%" + bean.getTitle() + "%");
+//        }
+//        example.setOrderByClause("create_date asc");
+        return ${data.varName}Mapper.selectByExample(example);
+    }
+
+
+    @Override
+    public ${data.className}Model getById(Long id) {
+        return ${data.varName}Mapper.selectByPrimaryKey(id);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED,
-            rollbackFor = {RuntimeException.class, Exception.class})
-    public Boolean insertSelective(${data.className} ${data.varName}) {
-        return ${data.varName}Mapper.insertSelective(${data.varName}) > 0;
+    rollbackFor = {RuntimeException.class, Exception.class})
+    public boolean insert(${data.className}Bean bean) {
+        ${data.className}Model model = CopyDataUtil.copyObject(bean, ${data.className}Model.class);
+        model.setId(null);
+        return ${data.varName}Mapper.insertSelective(model) > 0;
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED,
-            rollbackFor = {RuntimeException.class, Exception.class})
-    public Boolean insertBatch(List<${data.className}> ${data.varName}List) {
-        return ${data.varName}Mapper.insertBatch(${data.varName}List) > 0;
+    rollbackFor = {RuntimeException.class, Exception.class})
+    public boolean update(${data.className}Bean bean) {
+    ${data.className}Model model = CopyDataUtil.copyObject(bean, ${data.className}Model.class);
+        return ${data.varName}Mapper.updateByPrimaryKeySelective(model) > 0;
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED,
-            rollbackFor = {RuntimeException.class, Exception.class})
-    public Boolean delete(${pkPropertyType} ${pkProperty}) {
-    	return ${data.varName}Mapper.delete(${pkProperty}) > 0;
+    rollbackFor = {RuntimeException.class, Exception.class})
+    public boolean delete(Long id) {
+        return ${data.varName}Mapper.deleteByPrimaryKey(id) > 0;
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED,
-            rollbackFor = {RuntimeException.class, Exception.class})
-    public Boolean deleteBatch(List<${pkPropertyType}> ${pkProperty}List) {
-    	return ${data.varName}Mapper.deleteBatch(${pkProperty}List) > 0;
+    rollbackFor = {RuntimeException.class, Exception.class})
+    public Boolean batchRemove(String ids) {
+        String[] str = ids.split(",");
+        List<Long> list = Arrays.stream(str).map(Long::valueOf).collect(Collectors.toList());
+        return ${data.varName}Mapper.batchRemove(list) > 0;
     }
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED,
-            rollbackFor = {RuntimeException.class, Exception.class})
-    public Boolean update(${data.className} ${data.varName}) {
-    	return ${data.varName}Mapper.update(${data.varName}) > 0;
-    }
-
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED,
-            rollbackFor = {RuntimeException.class, Exception.class})
-    public Boolean updateSelective(${data.className} ${data.varName}) {
-    	return ${data.varName}Mapper.updateSelective(${data.varName}) > 0;
-    }
-
-    @Override
-	public ${data.className} selectByPrimaryKey(${pkPropertyType} ${pkProperty}){
-    	return ${data.varName}Mapper.selectByPrimaryKey(${pkProperty});
-    }
-
-    @Override
-    public ${data.className} selectOne(${data.className} ${data.varName}) {
-    	return ${data.varName}Mapper.selectOne(${data.varName});
-    }
-
-	@Override
-	public List<${data.className}> selectList(${data.className} ${data.varName}) {
-		return ${data.varName}Mapper.selectList(${data.varName});
-	}
-
-	@Override
-	public List<${data.className}> selectAll() {
-		return ${data.varName}Mapper.selectAll();
-	}
 
 }

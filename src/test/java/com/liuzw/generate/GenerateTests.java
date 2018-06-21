@@ -15,9 +15,9 @@ public class GenerateTests {
 	private IGenerateService generateService;
 
 	@Test
-	public void generateEntity(){
+	public void generateBean(){
 		String tableNames = "t_push_message";
-		generateService.generateEntity(tableNames);
+		generateService.generateBean(tableNames);
 	}
 
 	@Test
@@ -34,20 +34,20 @@ public class GenerateTests {
 	}
 
 	@Test
-	public void generateDao(){
-		String tableNames = "t_push_message";
-		generateService.generateDao(tableNames);
-	}
-
-	@Test
 	public void generateMapper(){
 		String tableNames = "t_push_message";
 		generateService.generateMapper(tableNames);
 	}
 
 	@Test
+	public void generateMapperXml(){
+		String tableNames = "t_push_message";
+		generateService.generateMapperXml(tableNames);
+	}
+
+	@Test
 	public void generateAll(){
-		String tableNames = "t_user_address";
+		String tableNames = "t_push_message";
 		generateService.generateAll(tableNames);
 	}
 

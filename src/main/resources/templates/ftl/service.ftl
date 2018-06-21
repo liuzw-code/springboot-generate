@@ -2,7 +2,8 @@ package ${data.packagePath}.${data.module}.service;
 
 
 
-import ${data.packagePath}.${data.module}.bean.${data.className};
+import ${data.packagePath}.${data.module}.bean.${data.className}Bean;
+import ${data.packagePath}.${data.module}.model.${data.className}Model;
 import java.util.List;
 
 
@@ -16,92 +17,54 @@ import java.util.List;
  <#assign pkPropertyType=data.pkColumns[0].propertyType!"">
 public interface ${data.className}Service {
 
-       /**
-        * 增加数据
-        *
-        * @param ${data.varName} 实体对象
-        * @return Boolean
-        */
-        Boolean insert(${data.className} ${data.varName});
+      /**
+	 * 返回分页列表信息
+	 *
+	 * @param bean    数据
+ 	 * @return       list<${data.className}Model>
+    */
+    List<${data.className}Model> getList(${data.className}QueryBean bean);
 
-       /**
-        * 增加数据（选择字段，策略插入）
-        *
-        * @param ${data.varName} 实体对象
-        * @return Boolean
-        */
-        Boolean insertSelective(${data.className} ${data.varName});
-
-       /**
-        * 批量插入数据
-        *
-        * @param ${data.varName}List 实体对象
-        * @return Boolean
-        */
-        Boolean insertBatch(List<${data.className}> ${data.varName}List);
+    /**
+    * 根据id返回信息
+    * @param id     id
+    * @return       SysUserModel
+    */
+    ${data.className}Model getById(Long id);
 
 
-       /**
-        * 删除数据
-        *
-        * @param ${pkProperty}  主键${pkProperty}
-        * @return Boolean
-        */
-        Boolean delete(${pkPropertyType} ${pkProperty});
+    /**
+    *增加
+    *
+    * @param bean   数据
+    * @return      boolean
+    */
+    boolean insert(${data.className}Bean bean);
 
-       /**
-        * 批量删除数据（根据ID）
-        *
-        * @param ${pkProperty}List 主键${pkProperty}列表
-        * @return Boolean
-        */
-        Boolean deleteBatch(List<${pkPropertyType}> ${pkProperty}List);
 
-       /**
-        * 更新bean中属性不为空的数据
-        *
-        * @param ${data.varName} 实体对象
-        * @return Boolean
-        */
-        Boolean update(${data.className} ${data.varName});
+    /**
+    * 根据ID删除
+    *
+    * @param id     id
+    * @return       boolean
+    */
+    boolean delete(Long id);
 
-       /**
-        * 更新数据（选择字段，策略更新）
-        *
-        * @param ${data.varName} 实体对象
-        * @return Boolean
-        */
-        Boolean updateSelective(${data.className} ${data.varName});
 
-       /**
-        * 根据主键查询
-        *
-        * @param  ${pkProperty} 主键
-        * @return Boolean
-        */
-        ${data.className} selectByPrimaryKey(${pkPropertyType} ${pkProperty});
+    /**
+    * 批量删除博客
+    *
+    * @param id     id
+    * @return       Boolean
+    */
+    Boolean batchRemove(String id);
 
-       /**
-        * 根据主键查询
-        *
-        * @param  ${data.varName} 实体对象
-        * @return Boolean
-        */
-        ${data.className} selectOne(${data.className} ${data.varName});
-
-       /**
-        * 查询数据
-        *
-        * @param  ${data.varName} 实体对象
-        * @return List<${data.className}>
-        */
-        List<${data.className}> selectList(${data.className} ${data.varName});
-
-       /**
-        * 查询所有数据
-        *
-        * @return List<${data.className}>
-        */
-        List<${data.className}> selectAll();
+    /**
+    *更新
+    *
+    * @param bean  数据
+    * @return     boolean
+    */
+    boolean update(${data.className}Bean bean);
 
 }

@@ -26,7 +26,7 @@ public interface IGenerateService {
      *
      * @param tableNames 表名
      */
-    void generateEntity(String tableNames);
+    void generateBean(String tableNames);
 
     /**
      * 生成实体类
@@ -54,14 +54,14 @@ public interface IGenerateService {
      *
      * @param tableNames 表名
      */
-    void generateDao(String tableNames);
+    void generateMapper(String tableNames);
 
     /**
      * 生成Mapper文件
      *
      * @param tableNames 表名
      */
-    void generateMapper(String tableNames);
+    void generateMapperXml(String tableNames);
 
     /**
      * 生成 vue文件

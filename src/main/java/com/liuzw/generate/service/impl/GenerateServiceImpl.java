@@ -92,8 +92,8 @@ public class GenerateServiceImpl implements IGenerateService {
     }
 
     @Override
-    public void generateEntity(String tableNames) {
-        generate(tableNames,"entity.ftl",".java","/bean");
+    public void generateBean(String tableNames) {
+        generate(tableNames,"bean.ftl",".java","/bean");
     }
 
     @Override
@@ -110,13 +110,14 @@ public class GenerateServiceImpl implements IGenerateService {
         generate(tableNames,"serviceImpl.ftl","ServiceImpl.java","/service/impl");
     }
     @Override
-    public void generateDao(String tableNames) {
-        generate(tableNames,"dao.ftl","Mapper.java","/mapper");
+    public void generateMapper(String tableNames) {
+        generate(tableNames,"mapper.ftl","Mapper.java","/mapper");
     }
 
     @Override
-    public void generateMapper(String tableNames) {
-        generate(tableNames,"mapper.ftl","Mapper.xml","/mapper");
+    public void generateMapperXml(String tableNames) {
+        generate(tableNames,"mapper_xml.ftl","Mapper.xml","/mapper");
+        generate(tableNames,"mapper_xml2.ftl","Mapper2.xml","/mapper");
     }
 
     @Override
@@ -137,12 +138,12 @@ public class GenerateServiceImpl implements IGenerateService {
     @Override
     public void generateAll(String tableNames) {
        // generateController(tableNames);
-        generateEntity(tableNames);
+        generateBean(tableNames);
         generateModel(tableNames);
         generateService(tableNames);
         generateServiceImpl(tableNames);
-        generateDao(tableNames);
         generateMapper(tableNames);
+        generateMapperXml(tableNames);
         //generateVue(tableNames);
         //generateMenuSql(tableNames);
         //generateJs(tableNames);
