@@ -1,56 +1,91 @@
 package com.liuzw.generate.bean;
 
+import lombok.Data;
+import org.apache.commons.lang.StringUtils;
+
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+
 /**
- * 返回数据
- * 
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2016年10月27日 下午9:59:27
+ * 封装返回结果
+ *
+ * @author liuzw
  */
-public class Result extends HashMap<String, Object> {
+@Data
+public class Result<T> implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	public Result() {
-		put("code", 0);
-	}
-	
-	public static Result error() {
-		return error(500, "未知异常，请联系管理员");
-	}
-	
-	public static Result error(String msg) {
-		return error(500, msg);
-	}
-	
-	public static Result error(int code, String msg) {
-		Result r = new Result();
-		r.put("code", code);
-		r.put("msg", msg);
-		return r;
+
+	/**
+	 * 状态码
+	 */
+	private Integer code;
+
+	/**
+	 * 返回内容
+	 */
+	private String message;
+
+	/**
+	 * 返回结果集
+	 */
+	private T data;
+
+	/**
+	 * 返回错误信息
+	 *
+	 * @return         Result
+	 */
+	public static <E> Result<E> createErrorResult() {
+		return createErrorResult(null);
 	}
 
-	public static Result ok(String msg) {
-		Result r = new Result();
-		r.put("msg", msg);
-		return r;
-	}
-	
-	public static Result ok(Map<String, Object> map) {
-		Result r = new Result();
-		r.putAll(map);
-		return r;
-	}
-	
-	public static Result ok() {
-		return new Result();
+	/**
+	 * 返回错误信息
+	 *
+	 * @param message  返回内容
+	 * @return         Result
+	 */
+	public static <E> Result<E> createErrorResult(String message) {
+		if (StringUtils.isEmpty(message)) {
+			message = "error";
+		}
+		return new Result<>(2, message, null);
 	}
 
-	@Override
-	public Result put(String key, Object value) {
-		super.put(key, value);
-		return this;
+
+
+	/**
+	 * 返回成功信息
+	 *
+	 * @param data     返回结果集
+	 * @return         Result
+	 */
+	public static <E> Result<E> createSuccessResult(E data) {
+		return createSuccessResult(data, null);
 	}
+	/**
+	 * 返回成功信息
+	 *
+	 * @param data     返回结果集
+	 * @param message      返回内容
+	 * @return         Result
+	 */
+	public static <E> Result<E> createSuccessResult(E data, String message) {
+		if (StringUtils.isEmpty(message)) {
+			message = "success";
+		}
+		return new Result<>(1, message, data);
+	}
+
+
+	private Result(int code, String message, T data) {
+		this.code = code;
+		this.message = message;
+		this.data = data;
+	}
+
 }

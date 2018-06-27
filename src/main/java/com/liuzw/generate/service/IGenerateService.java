@@ -1,11 +1,11 @@
 package com.liuzw.generate.service;
 
 
+import com.liuzw.generate.bean.Page;
 import com.liuzw.generate.bean.Query;
 import com.liuzw.generate.bean.Table;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *@author liuzw
@@ -105,15 +105,7 @@ public interface IGenerateService {
      * @param query   Query
      * @return        List<Table>
      */
-    List<Table> queryList(Query query);
-
-    /**
-     * 统计数据库中的表的数量
-     *
-     * @param query   Query
-     * @return        List
-     */
-    Integer queryTotal(Query query);
+    Page<Table> queryList(Query query);
 
     /**
      * 生成代码（web端使用）

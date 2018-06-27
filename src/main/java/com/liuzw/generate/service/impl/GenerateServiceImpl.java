@@ -1,10 +1,7 @@
 package com.liuzw.generate.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.liuzw.generate.bean.BasicData;
-import com.liuzw.generate.bean.Column;
-import com.liuzw.generate.bean.Query;
-import com.liuzw.generate.bean.Table;
+import com.liuzw.generate.bean.*;
 import com.liuzw.generate.mapper.ColumnMapper;
 import com.liuzw.generate.service.IGenerateService;
 import com.liuzw.generate.utils.JavaTypeUtils;
@@ -163,14 +160,16 @@ public class GenerateServiceImpl implements IGenerateService {
 
 
     @Override
-    public List<Table> queryList(Query query) {
-        return columnMapper.queryList(query);
+    public Page<Table> queryList(Query query) {
+         //分页参数
+        Map<String, Object> map = new HashMap<>(6);
+        map.put("offset", (query.getPageNum() - 1) * query.getPageSize());
+        map.put("limit", query.getPageSize());
+        List<Table> list = columnMapper.queryList(map);
+        Long total = columnMapper.queryTotal(query);
+        return new Page<>(list, total, query.getPageSize(), query.getPageNum());
     }
 
-    @Override
-    public Integer queryTotal(Query query) {
-        return columnMapper.queryTotal(query);
-    }
 
     @Override
     public void generatorCode(String tableNames, String path) {

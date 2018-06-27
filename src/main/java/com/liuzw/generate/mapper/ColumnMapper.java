@@ -32,10 +32,10 @@ public interface ColumnMapper {
 	/**
 	 * 获取数据库中的表的信息
 	 *
-	 * @param query   Query
+	 * @param map     map
 	 * @return        List<Table>
 	 */
-	List<Table> queryList(Query query);
+	List<Table> queryList(Map<String, Object> map);
 
 	/**
 	 * 统计数据库中的表的数量
@@ -43,6 +43,6 @@ public interface ColumnMapper {
 	 * @param query   Query
 	 * @return        List
 	 */
-	Integer queryTotal(Query query);
+	Long queryTotal(Query query);
 
 }

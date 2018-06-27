@@ -18,14 +18,14 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "data.data",
+            page: "data.pageNum",
+            total: "data.totalPage",
+            records: "data.total"
         },
         prmNames : {
-            page:"page", 
-            rows:"limit", 
+            page:"pageNum",
+            rows:"pageSize",
             order: "order"
         },
         gridComplete:function(){
@@ -72,7 +72,7 @@ var vm = new Vue({
                 url: "/generateCode?tables="+tableNames + "&path="+path,
                 type: "get",
                 dataType: "text",
-                success: function(data){
+                success: function(){
                   alert("代码生成成功！，请去[" + path + "]下查看");
                     $("#myModal").modal('hide');
                 },

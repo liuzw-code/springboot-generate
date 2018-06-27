@@ -77,7 +77,7 @@
 		</if>
 	</select>
 
-	<select id="queryTotal" resultType="int">
+	<select id="queryTotal" resultType="long">
 		select count(*) from information_schema.tables where table_schema = (select database())
 		<if test="tableName != null and tableName.trim() != ''">
 			and table_name like concat('%', #{tableName}, '%')
