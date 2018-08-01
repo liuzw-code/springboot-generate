@@ -20,7 +20,7 @@ import java.util.List;
 public interface ${data.className}Mapper extends Mapper<${data.className}Model>, MySqlMapper<${data.className}Model> {
 
     /**
-    * 批量删除博客
+    * 批量删除
     *
     * @param ids     id
     * @return       Integer

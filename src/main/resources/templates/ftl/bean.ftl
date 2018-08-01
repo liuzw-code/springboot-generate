@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ${data.className} {
+public class ${data.className}Bean {
 
 <#list data.columns as c>
 

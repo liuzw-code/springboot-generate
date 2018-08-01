@@ -9,7 +9,7 @@
  <#assign start=start+"{">
  <#assign end="}">
 
-<mapper namespace="${data.packagePath}.${data.module}.dao.${data.className}Mapper">
+<mapper namespace="${data.packagePath}.${data.module}.mapper.${data.className}Mapper">
 
     <resultMap id="BaseResultMap" type="${data.packagePath}.${data.module}.bean.${data.className}">
 	<#list data.columns as c>

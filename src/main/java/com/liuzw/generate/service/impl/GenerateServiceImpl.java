@@ -90,12 +90,12 @@ public class GenerateServiceImpl implements IGenerateService {
 
     @Override
     public void generateBean(String tableNames) {
-        generate(tableNames,"bean.ftl",".java","/bean");
+        generate(tableNames,"bean.ftl","Bean.java","/bean");
     }
 
     @Override
     public void generateModel(String tableNames) {
-        generate(tableNames,"model.ftl",".java","/model");
+        generate(tableNames,"model.ftl","Model.java","/model");
     }
 
     @Override

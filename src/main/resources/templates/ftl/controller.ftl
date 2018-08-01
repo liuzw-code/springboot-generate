@@ -40,7 +40,7 @@ public class ${data.className}Controller extends BaseController {
      * @return     ResultData<Page<${data.className}Bean>>
      */
      @ApiOperation(value = "获取数据列表", notes = "获取数据列表")
-     @PostMapping(value = "/${data.varName}/list",  produces = MediaType.APPLICATION_JSON_VALUE)
+     @PostMapping(value = "/${data.varName}/list")
      public ResultData<Page<${data.className}Bean>> getList(@RequestBody ${data.className}QueryBean bean) {
          return  ResultData.createSelectSuccessResult(convertPageInfo(${data.varName}Service.getList(bean), ${data.className}Bean.class));
      }
@@ -52,7 +52,7 @@ public class ${data.className}Controller extends BaseController {
      * @return     ResultData<${data.className}Bean>
      */
      @ApiOperation(value = "查询指定数据", notes = "查询指定数据")
-     @PostMapping(value = "/${data.varName}/getById",  produces = MediaType.APPLICATION_JSON_VALUE)
+     @PostMapping(value = "/${data.varName}/getById")
      public ResultData<${data.className}Bean> getById(@RequestBody Id id) {
         if (id.getId() == null) {
             return ResultData.createErrorResult("id 不能为空");
@@ -68,7 +68,7 @@ public class ${data.className}Controller extends BaseController {
      * @return      ResultData<${data.className}Bean>
      */
      @ApiOperation(value = "增加数据", notes = "增加数据")
-     @PostMapping(value = "/${data.varName}/add",  produces = MediaType.APPLICATION_JSON_VALUE)
+     @PostMapping(value = "/${data.varName}/add")
      public ResultData<${data.className}Bean> insert(@RequestBody ${data.className}Bean bean) {
         return ResultData.createInsertResult(${data.varName}Service.insert(bean));
      }
@@ -80,7 +80,7 @@ public class ${data.className}Controller extends BaseController {
      * @return     ResultData<${data.className}Bean>
      */
      @ApiOperation(value = "更新数据", notes = "更新数据")
-     @PostMapping(value = "/${data.varName}/edit",  produces = MediaType.APPLICATION_JSON_VALUE)
+     @PostMapping(value = "/${data.varName}/edit")
      public ResultData<${data.className}Bean> update(@RequestBody ${data.className}Bean bean) {
          return ResultData.createUpdateResult(${data.varName}Service.update(bean));
      }
@@ -93,7 +93,7 @@ public class ${data.className}Controller extends BaseController {
       * @return        ResultData<String>
       */
       @ApiOperation(value = "删除数据", notes = "删除数据")
-      @PostMapping(value = "/${data.varName}/remove",  produces = MediaType.APPLICATION_JSON_VALUE)
+      @PostMapping(value = "/${data.varName}/remove")
       public ResultData<Void> delete(@RequestBody Id id) {
          if (id.getId() != null) {
              return ResultData.createErrorResult("id 不能为空");
@@ -108,7 +108,7 @@ public class ${data.className}Controller extends BaseController {
        * @return        ResultData<Void>
        */
        @ApiOperation(value = "删除数据", notes = "删除数据")
-       @PostMapping(value = "/${data.varName}/batchRemove",  produces = MediaType.APPLICATION_JSON_VALUE)
+       @PostMapping(value = "/${data.varName}/batchRemove")
        public ResultData<Void> batchRemove(@RequestBody Id ids) {
           if (StringUtils.isEmpty(ids.getIds())) {
               return ResultData.createErrorResult("id 不能为空");

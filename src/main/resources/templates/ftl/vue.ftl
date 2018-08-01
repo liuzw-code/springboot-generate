@@ -2,7 +2,6 @@
     <section>
         <!--工具条-->
         <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-
             <el-form align="right" :inline="true"  class="demo-form-inline">
                 <el-form-item label="">
                     <el-input v-model="filters.xxxxx" placeholder="查询条件没写，自己写....."></el-input>
@@ -174,7 +173,7 @@
                                      }
                                 })
                             } else {
-                                let para = Object.assign({}, this.form);
+                                let para = this.form;
                                 add${data.className}(para).then((res) => {
                                     this.addLoading = false;
                                     if (this.GLOBAL.isResonseSuccess(res)) {
