@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common :: common_header">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="form-horizontal" id="paramsForm">
+
+                <input type="hidden" id="id" th:value="${params.id}">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">名称</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="name" name="name" type="text"
+                                       th:value="${params.name}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-6 b-r">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">作者</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="author" name="author" type="text"
+                                       th:value="${params.author}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">包名</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="packageName" name="packageName" type="text"
+                                       th:value="${params.packageName}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-6 b-r">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模块</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="moduleName" name="moduleName" type="text"
+                                       th:value="${params.moduleName}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">本地目录</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="localPath" name="localPath" type="text"
+                                       th:value="${params.localPath}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">版权</label>
+                            <div class="col-sm-10">
+                                <textarea rows="8" id="copyright" name="copyright" class="form-control"
+                                          style="width: 100%"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10">
+                        <button type="button" class="btn btn-info button-margin"
+                                onclick="GenParamInfoDlg.editSubmit()" id="ensure">
+                            <i class="fa fa-check"></i>&nbsp;提交
+                        </button>
+                        <button type="button" class="btn btn-danger button-margin"
+                                onclick="GenParamInfoDlg.close()" id="cancel">
+                            <i class="fa fa-eraser"></i>&nbsp;取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script th:src="@{/modular/code/param/param_info.js}"></script>
+</body>

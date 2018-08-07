@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liuzw.generate.mapper.ParamsMapper">
+
+    <resultMap id="BaseResultMap" type="com.liuzw.generate.bean.ParamsBean">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="code_package" jdbcType="VARCHAR" property="packageName"/>
+        <result column="module_name" jdbcType="VARCHAR" property="moduleName"/>
+        <result column="local_path" jdbcType="VARCHAR" property="localPath"/>
+        <result column="copyright" jdbcType="VARCHAR" property="copyright"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
+    </resultMap>
+
+</mapper>

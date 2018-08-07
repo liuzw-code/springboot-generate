@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common :: common_header">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>代码生成</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row row-lg">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
+                                                    type="button">数据库连接
+                                            </button>
+                                        </div>
+                                        <select class="form-control" id="genId">
+                                            <option  th:each="list : ${databaseList}"
+                                                     th:value="${list.id}"
+                                                     th:text="${list.name}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
+                                                    type="button">表名
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control" id="tableName"
+                                               placeholder=""/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn btn-primary button-margin"
+                                            onclick="Gen.search()">
+                                        <i class="fa fa-search"></i>&nbsp;搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="GenTableToolbar" role="group">
+                            <button type="button" class="btn btn-primary button-margin"
+                                    onclick="Gen.openGen()">
+                                <i class="fa fa-plus"></i>&nbsp;详情
+                            </button>
+                        </div>
+                        <table id="GenTable" data-mobile-responsive="true" data-click-to-select="true">
+                            <thead>
+                            <tr>
+                                <th data-field="selectItem" data-checkbox="true"></th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/modular/code/gen/gen.js}"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liuzw.generate.mapper.DatabaseInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.liuzw.generate.bean.DatabaseInfoBean">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="db_remark" jdbcType="VARCHAR" property="name"/>
+        <result column="db_driver" jdbcType="VARCHAR" property="dbDriver"/>
+        <result column="db_url" jdbcType="VARCHAR" property="dbUrl"/>
+        <result column="db_username" jdbcType="VARCHAR" property="dbUsername"/>
+        <result column="db_password" jdbcType="VARCHAR" property="dbPassword"/>
+        <result column="db_type" jdbcType="INTEGER" property="dbType"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        db_remark,
+        db_driver,
+        db_url,
+        db_username,
+        db_password,
+        db_type,
+        create_time,
+        update_time
+    </sql>
+
+
+</mapper>

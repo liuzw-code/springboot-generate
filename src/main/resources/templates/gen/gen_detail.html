@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common :: common_header">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row" xmlns="">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>代码生成</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="form-horizontal" id="genForm">
+                            <input type="hidden" id="tableNames" th:value="${tableNames}">
+                            <input type="hidden" id="databaseId" th:value="${databaseId}">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">参数</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" id="params" name="params">
+                                                <option value=""></option>
+                                                <option  th:each="list : ${params}"
+                                                         th:value="${list.id}"
+                                                         th:text="${list.name}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">作者</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" id="author" name="author" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">类名</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" id="className" name="className" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">包名</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" id="packageName" name="packageName" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">模块</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" id="moduleName" name="moduleName" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">本地路径</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" id="localPath" name="localPath" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">版权</label>
+                                        <div class="col-sm-8">
+                                        <textarea rows="8" id="copyright" name="copyright" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">模板</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="groupId">
+                                                <option value="">全部</option>
+                                                <option  th:each="list : ${group}"
+                                                         th:value="${list.id}"
+                                                         th:text="${list.groupName }"></option>
+                                            </select>
+                                            <div class="list-group" id="templatesList"
+                                                 style="overflow-y: scroll">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <button id="genBtn" disabled="disabled" type="button" class="btn btn-primary mr10"
+                                            onclick="GenInfo.genCode()">
+                                        <span style="padding: 5px 20px;">生成</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script th:src="@{/modular/code/gen/gen_info.js}"></script>
+

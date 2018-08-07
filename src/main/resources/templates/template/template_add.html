@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common :: common_header">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">名称</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="templateName" name="templateName" type="text">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">描述</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="templateDesc" name="templateDesc" type="text">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">模板路径</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="templatePath" name="templatePath" type="text">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">生成文件名</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="templateFileName" name="templateFileName" type="text">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">语言</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="templateType" name="templateType">
+                                    <option value=""></option>
+                                    <option value="Java">Java</option>
+                                    <option value="JavaScript">JavaScript</option>
+                                    <option value="Html">Html</option>
+                                    <option value="Xml">Xml</option>
+                                    <option value="SQL">SQL</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">组</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="groupId" name="groupId">
+                                    <option></option>
+                                    <option  th:each="list : ${group}"
+                                             th:value="${list.id}"
+                                             th:text="${list.groupName }"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-12">
+                        <textarea id="templateContent" name="templateContent" class="form-control"rows="15"></textarea>
+                        <pre id="codeFile" style="display:none;height: 310px;">
+                            <code>
+
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10">
+                        <button type="button" class="btn btn-info button-margin"
+                                onclick="TemplateInfoDlg.addSubmit()" id="ensure">
+                            <i class="fa fa-check"></i>&nbsp;提交
+                        </button>
+                        <button type="button" class="btn btn-danger button-margin"
+                                onclick="TemplateInfoDlg.close()" id="cancel">
+                            <i class="fa fa-eraser"></i>&nbsp;取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/plugins/highlight/highlight.pack.js}"></script>
+<script th:src="@{/modular/code/template/template_info.js}"></script>
+</body>
