@@ -47,7 +47,7 @@
                         var v = {
                             pageSize: param.limit,
                             pageNum: param.offset
-                        }
+                        };
                         return $.extend(me.queryParams, v);
                     },
                     sortable: false, // 是否启用排序
@@ -60,7 +60,6 @@
                     clickToSelect: true,    	//是否启用点击选中行
                     searchOnEnterKey: true,		//设置为 true时，按回车触发搜索方法，否则自动触发搜索方法
                     columns: this.columns,		//列数组
-                    pagination: true,			//是否显示分页条
                     height: this.height,
                     icons: {
                         refresh: 'glyphicon-repeat',
@@ -73,7 +72,7 @@
                             "total": res.data.total,//总页数
                             "rows": res.data.data   //数据
                         };
-                    },
+                    }
 
                 });
             return this;
@@ -96,14 +95,14 @@
          * 设置ajax post请求时候附带的参数
          */
         set: function (key, value) {
-            if (typeof key == "object") {
+            if (typeof key === "object") {
                 for (var i in key) {
-                    if (typeof i == "function")
+                    if (typeof i === "function")
                         continue;
                     this.data[i] = key[i];
                 }
             } else {
-                this.data[key] = (typeof value == "undefined") ? $("#" + key).val() : value;
+                this.data[key] = (typeof value === "undefined") ? $("#" + key).val() : value;
             }
             return this;
         },
@@ -132,7 +131,7 @@
          * To supply query params specific to this request, set {query: {foo: 'bar'}}
          */
         refresh: function (parms) {
-            if (typeof parms != "undefined") {
+            if (typeof parms !== "undefined") {
                 this.btInstance.bootstrapTable('refresh', parms);
             } else {
                 this.btInstance.bootstrapTable('refresh');

@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class GenCodeBean {
     /**
      * 基本参数
      */
-    @NotNull(message = "基本参数不能为空")
+    @Valid
     private ParamsBean params;
 
     /**

@@ -1,10 +1,13 @@
 package com.liuzw.generate.bean;
 
+import com.liuzw.generate.valid.Update;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -22,26 +25,30 @@ public class ParamsBean {
 
 
     /**
-     *
+     * id
      */
+    @NotNull(message = "id不能为空", groups = Update.class)
     private Long id;
 
 
     /**
-     * 别名
+     * 名称
      */
+    @NotBlank(message = "名称不能为空")
     private String name;
 
 
     /**
      * 作者
      */
+    @NotBlank(message = "作者不能为空")
     private String author;
 
 
     /**
      * 包名
      */
+    @NotBlank(message = "包名不能为空")
     private String packageName;
 
 

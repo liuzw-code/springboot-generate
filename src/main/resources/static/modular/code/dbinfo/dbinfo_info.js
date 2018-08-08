@@ -7,28 +7,28 @@ var DbInfoInfoDlg = {
         name: {
             validators: {
                 notEmpty: {
-                    message: '名称不能为空'
+                    message: "名称不能为空"
                 }
             }
         },
         dbUrl: {
             validators: {
                 notEmpty: {
-                    message: '链接不能为空'
+                    message: "链接不能为空"
                 }
             }
         },
         dbPassword: {
             validators: {
                 notEmpty: {
-                    message: '密码不能为空'
+                    message: "密码不能为空"
                 }
             }
         },
         dbUsername: {
             validators: {
                 notEmpty: {
-                    message: '用户名名称不能为空'
+                    message: "用户名名称不能为空"
                 }
             }
         }
@@ -75,16 +75,16 @@ DbInfoInfoDlg.close = function () {
  * 收集数据
  */
 DbInfoInfoDlg.collectData = function () {
-    this.set('id').set('name').set('dbType').set('dbUrl').set('dbUsername').set('dbPassword');
+    this.set("id").set("name").set("dbType").set("dbUrl").set("dbUsername").set("dbPassword");
 };
 
 /**
  * 验证数据是否为空
  */
 DbInfoInfoDlg.validate = function () {
-    $('#dbinfoForm').data("bootstrapValidator").resetForm(true);
-    $('#dbinfoForm').bootstrapValidator('validate');
-    return $("#dbinfoForm").data('bootstrapValidator').isValid();
+    $("#dbinfoForm").data("bootstrapValidator").resetForm();
+    $("#dbinfoForm").bootstrapValidator("validate");
+    return $("#dbinfoForm").data("bootstrapValidator").isValid();
 };
 /**
  * 提交添加

@@ -18,7 +18,7 @@ import java.util.Map;
  * @author liuzw
  */
 @Configuration
-public class DataSourceConfigurer {
+public class DataSourceConfiguration {
 
     @Value("${spring.datasource.url}")
     private String defaultDBUrl;

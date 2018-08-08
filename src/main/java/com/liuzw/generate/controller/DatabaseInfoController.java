@@ -4,10 +4,15 @@ package com.liuzw.generate.controller;
 import com.liuzw.generate.bean.*;
 import com.liuzw.generate.service.DatabaseInfoService;
 import com.liuzw.generate.utils.CopyDataUtil;
+import com.liuzw.generate.valid.Insert;
+import com.liuzw.generate.valid.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 数据库管理
@@ -46,7 +51,7 @@ public class DatabaseInfoController extends BaseController {
      * @param id 主键id
      */
     @GetMapping(value = "/edit/{id}")
-    public String query(@PathVariable("id") Long id, Model model) {
+    public String query(@NotNull(message = "id不能为空") @PathVariable("id") Long id, Model model) {
         DatabaseInfoBean bean = CopyDataUtil.copyObject(codeDatabaseInfoService.getById(id), DatabaseInfoBean.class);
         model.addAttribute("dbinfo", bean);
         return "dbinfo/dbinfo_edit";
@@ -74,7 +79,7 @@ public class DatabaseInfoController extends BaseController {
      */
     @PostMapping(value = "/add")
     @ResponseBody
-    public ResultData<DatabaseInfoBean> insert(@RequestBody DatabaseInfoBean dto) {
+    public ResultData<DatabaseInfoBean> insert(@Validated @RequestBody DatabaseInfoBean dto) {
         return ResultData.createInsertResult(codeDatabaseInfoService.insert(dto));
     }
 
@@ -86,7 +91,7 @@ public class DatabaseInfoController extends BaseController {
      */
     @PostMapping(value = "/edit")
     @ResponseBody
-    public ResultData<DatabaseInfoBean> update(@RequestBody DatabaseInfoBean dto) {
+    public ResultData<DatabaseInfoBean> update(@Validated(Update.class) @RequestBody DatabaseInfoBean dto) {
         return ResultData.createUpdateResult(codeDatabaseInfoService.update(dto));
     }
 
@@ -99,7 +104,7 @@ public class DatabaseInfoController extends BaseController {
      */
     @PostMapping(value = "/remove")
     @ResponseBody
-    public ResultData<Void> delete(@RequestBody IdBean id) {
+    public ResultData<Void> delete(@NotNull(message = "id不能为空") @RequestBody IdBean id) {
         return ResultData.createDeleteResult(codeDatabaseInfoService.delete(id.getId()));
     }
 

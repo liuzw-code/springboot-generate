@@ -3,13 +3,15 @@ package com.liuzw.generate.controller;
 import com.liuzw.generate.aop.TargetDataSource;
 import com.liuzw.generate.bean.*;
 import com.liuzw.generate.service.*;
-import org.apache.commons.lang3.StringUtils;
+import com.liuzw.generate.valid.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -18,6 +20,7 @@ import java.util.List;
  * @author liuzw
  * @date 2018/8/1 15:42
  **/
+@Validated
 @Controller
 @RequestMapping("gen")
 public class GenCodeController extends BaseController {
@@ -54,12 +57,10 @@ public class GenCodeController extends BaseController {
      */
     @GetMapping("/gen/{databaseId}/{tableNames}")
     public String genDetail(Model model,
-                            @PathVariable("databaseId") Long databaseId,
-                            @PathVariable("tableNames") String tableNames) {
-        if (StringUtils.isNotEmpty(tableNames)) {
-            tableNames = tableNames.substring(0, tableNames.lastIndexOf(","));
-            model.addAttribute("tableNames", tableNames);
-        }
+                 @NotNull(message = "数据源id不能为空") @PathVariable("databaseId") Long databaseId,
+                 @NotNull(message = "表名不能为空") @PathVariable("tableNames") String tableNames) {
+        tableNames = tableNames.substring(0, tableNames.lastIndexOf(","));
+        model.addAttribute("tableNames", tableNames);
         model.addAttribute("databaseId", databaseId);
         model.addAttribute("group", templateGroupService.getList());
         model.addAttribute("params", paramsService.getList());
@@ -81,7 +82,7 @@ public class GenCodeController extends BaseController {
     @TargetDataSource
     @PostMapping("/genCode")
     @ResponseBody
-    public ResultData<Boolean> genCode(@RequestBody GenCodeBean bean) {
+    public ResultData<Boolean> genCode(@Validated(Insert.class) @RequestBody GenCodeBean bean) {
         Boolean flag = genCodeService.genCode(null, bean);
         if (flag) {
             return ResultData.createSuccessResult(null, "代码生成成功");

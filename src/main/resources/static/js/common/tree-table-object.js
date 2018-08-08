@@ -40,7 +40,7 @@
                     expandAll: this.expandAll,  //是否全部展开
                     columns: this.columns,		//列数组
                     toolbar: "#" + this.toolbarId,//顶部工具条
-                    height: this.height,
+                    height: this.height
                 });
             return this;
         },
@@ -86,21 +86,6 @@
          */
         setHeight: function (height) {
             this.height = height;
-        },
-        /**
-         * 设置ajax post请求时候附带的参数
-         */
-        set: function (key, value) {
-            if (typeof key === "object") {
-                for (var i in key) {
-                    if (typeof i === "function")
-                        continue;
-                    this.data[i] = key[i];
-                }
-            } else {
-                this.data[key] = (typeof value === "undefined") ? $("#" + key).val() : value;
-            }
-            return this;
         },
 
         /**

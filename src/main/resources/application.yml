@@ -55,9 +55,3 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count = countSql
-
-logging:
-  level.root: info
-  level.com.liuzw: debug
-  level.org.springframework: info
-  level.org.apache.ibatis: debug

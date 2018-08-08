@@ -14,8 +14,8 @@ import java.util.Properties;
  * @date 2018/8/6 18:08
  **/
 @Configuration
-@AutoConfigureAfter(DataSourceConfigurer.class)
-public class MyBatisMapperScannerConfigurer {
+@AutoConfigureAfter(DataSourceConfiguration.class)
+public class MyBatisMapperScannerConfiguration {
 
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {

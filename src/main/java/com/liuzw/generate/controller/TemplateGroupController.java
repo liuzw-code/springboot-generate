@@ -4,10 +4,15 @@ package com.liuzw.generate.controller;
 import com.liuzw.generate.bean.*;
 import com.liuzw.generate.service.TemplateGroupService;
 import com.liuzw.generate.utils.CopyDataUtil;
+import com.liuzw.generate.valid.Insert;
+import com.liuzw.generate.valid.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 模板组管理
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  * @author liuzw
  * @version V1.0
  **/
+@Validated
 @Controller
 @RequestMapping("/templateGroup")
 public class TemplateGroupController extends BaseController {
@@ -43,7 +49,7 @@ public class TemplateGroupController extends BaseController {
      * 跳转到 模板组修改 页面
      */
     @GetMapping(value = "/edit/{id}")
-    public String templateGroupUpdate(@PathVariable("id") Long id, Model model) {
+    public String templateGroupUpdate(@NotNull(message = "id不能为空") @PathVariable("id") Long id, Model model) {
         TemplateGroupBean bean = CopyDataUtil.copyObject(templateGroupService.getById(id), TemplateGroupBean.class);
         model.addAttribute("templateGroup", bean);
         return "group/templateGroup_edit";
@@ -71,7 +77,7 @@ public class TemplateGroupController extends BaseController {
      */
     @PostMapping(value = "/add")
     @ResponseBody
-    public ResultData<TemplateGroupBean> insert(@RequestBody TemplateGroupBean dto) {
+    public ResultData<TemplateGroupBean> insert(@Validated(Insert.class) @RequestBody TemplateGroupBean dto) {
         return ResultData.createInsertResult(templateGroupService.insert(dto));
     }
 
@@ -83,7 +89,7 @@ public class TemplateGroupController extends BaseController {
      */
     @PostMapping(value = "/edit")
     @ResponseBody
-    public ResultData<TemplateGroupBean> update(@RequestBody TemplateGroupBean dto) {
+    public ResultData<TemplateGroupBean> update(@Validated(Update.class) @RequestBody TemplateGroupBean dto) {
         return ResultData.createUpdateResult(templateGroupService.update(dto));
     }
 
@@ -96,7 +102,7 @@ public class TemplateGroupController extends BaseController {
      */
     @PostMapping(value = "/remove")
     @ResponseBody
-    public ResultData<Void> delete(@RequestBody IdBean id) {
+    public ResultData<Void> delete(@NotNull(message = "id不能为空") @RequestBody IdBean id) {
         return ResultData.createDeleteResult(templateGroupService.delete(id.getId()));
     }
 
