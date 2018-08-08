@@ -91,7 +91,7 @@ GenParamInfoDlg.close = function () {
  */
 GenParamInfoDlg.collectData = function () {
     this.set('id').set("name").set("author").set("packageName")
-        .set("moduleName").set("localPath").set("copyright");
+        .set("localPath").set("copyright");
 };
 
 /**

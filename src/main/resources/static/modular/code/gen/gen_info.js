@@ -131,7 +131,6 @@ GenInfo.genCode = function () {
         "author": $("#author").val(),
         "name": $("#name").val(),
         "packageName": $("#packageName").val(),
-        "moduleName": $("#moduleName").val(),
         "localPath": $("#localPath").val(),
         "copyright": $("#copyright").val()
     };
@@ -169,7 +168,6 @@ $("#params").change(function () {
     var ajax = new $ax(Root.ctxPath + '/params/getById/' + $(this).val(), function (data) {
         $("#author").val(data.data.author);
         $("#packageName").val(data.data.packageName);
-        $("#moduleName").val(data.data.moduleName);
         $("#localPath").val(data.data.localPath);
         $("#copyright").val(data.data.copyright);
     });

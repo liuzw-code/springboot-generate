@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
  * @author liuzw
  * @version V1.0
  **/
+@Validated
 @Controller
 @RequestMapping("/databaseInfo")
 public class DatabaseInfoController extends BaseController {
@@ -77,7 +78,7 @@ public class DatabaseInfoController extends BaseController {
      * @param dto DatabaseInfoDto
      * @return ResultData<DatabaseInfoBean>
      */
-    @PostMapping(value = "/add")
+    @RequestMapping(value = "/add")
     @ResponseBody
     public ResultData<DatabaseInfoBean> insert(@Validated @RequestBody DatabaseInfoBean dto) {
         return ResultData.createInsertResult(codeDatabaseInfoService.insert(dto));
@@ -91,7 +92,7 @@ public class DatabaseInfoController extends BaseController {
      */
     @PostMapping(value = "/edit")
     @ResponseBody
-    public ResultData<DatabaseInfoBean> update(@Validated(Update.class) @RequestBody DatabaseInfoBean dto) {
+    public ResultData<DatabaseInfoBean> update(@Validated({Update.class}) @RequestBody DatabaseInfoBean dto) {
         return ResultData.createUpdateResult(codeDatabaseInfoService.update(dto));
     }
 

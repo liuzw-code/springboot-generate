@@ -9,7 +9,6 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="author" jdbcType="VARCHAR" property="author"/>
         <result column="code_package" jdbcType="VARCHAR" property="packageName"/>
-        <result column="module_name" jdbcType="VARCHAR" property="moduleName"/>
         <result column="local_path" jdbcType="VARCHAR" property="localPath"/>
         <result column="copyright" jdbcType="VARCHAR" property="copyright"/>
         <result column="create_time" jdbcType="VARCHAR" property="createTime"/>

@@ -34,14 +34,14 @@ public class BasicDataBean {
 	private String classVarName;
 
 	/**
-	 * 模块名称
-	 */
-	private String moduleName;
-
-	/**
 	 * 包名
 	 */
 	private String packageName;
+
+	/**
+	 * 类路径
+	 */
+	private String classPath;
 
 	/**
 	 * 作者
@@ -64,14 +64,11 @@ public class BasicDataBean {
 	private List<ColumnBean> pkColumns;
 
 
-
-
 	public static BasicDataBean get(ParamsBean bean) {
 		return BasicDataBean.builder()
 				.author(bean.getAuthor())
 				.copyright(bean.getCopyright())
 				.packageName(bean.getPackageName())
-				.moduleName(bean.getModuleName())
 				.build();
 	}
 

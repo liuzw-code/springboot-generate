@@ -54,12 +54,6 @@ public class ParamsModel {
 
 
     /**
-     * 模块名
-     */
-    @Column(name = "module_name")
-    private String moduleName;
-
-    /**
      * 本地路径
      */
     @Column(name = "local_path")

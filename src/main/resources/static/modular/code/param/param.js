@@ -17,10 +17,9 @@ Param.initColumn = function () {
         {title: '别名', field: 'name', align: 'center', valign: 'middle'},
         {title: '作者', field: 'author', align: 'center', valign: 'middle'},
         {title: '包名', field: 'packageName', align: 'center', valign: 'middle'},
-        {title: '模块名', field: 'moduleName', align: 'center', valign: 'middle'},
         {title: '本地路径', field: 'localPath', align: 'center', valign: 'middle'},
         {title: '创建时间', field: 'createTime', align: 'center', valign: 'middle'},
-        {title: '创建时间', field: 'updateTime', align: 'center', valign: 'middle'},
+        {title: '创建时间', field: 'updateTime', align: 'center', valign: 'middle'}
     ];
 };
 

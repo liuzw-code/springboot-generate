@@ -37,8 +37,15 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">模板路径</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" id="templatePath" name="templatePath"
-                                           type="text" th:value="${template.templatePath}">
+                                    <select class="form-control" id="templatePath" name="templatePath">
+                                        <option value=""></option>
+                                        <option th:selected="${template.templatePath == 'controller'}" value="controller">controller</option>
+                                        <option th:selected="${template.templatePath == 'service'}" value="service">service</option>
+                                        <option th:selected="${template.templatePath == 'service.html'}" value="service.html">service.html</option>
+                                        <option th:selected="${template.templatePath == 'mapper'}" value="mapper">mapper</option>
+                                        <option th:selected="${template.templatePath == 'bean'}" value="bean">bean</option>
+                                        <option th:selected="${template.templatePath == 'model'}" value="model">model</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -47,7 +54,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">生成文件名</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" id="templateFileName" name="templateFileName" type="text">
+                                    <input class="form-control" id="templateFileName" name="templateFileName" type="text" th:value="${template.templateFileName}">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>

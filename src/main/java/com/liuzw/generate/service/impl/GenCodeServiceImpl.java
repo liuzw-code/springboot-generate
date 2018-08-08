@@ -61,6 +61,7 @@ public class GenCodeServiceImpl implements GenCodeService {
         List<TemplateBean> list = new ArrayList<>();
         //2.获取要生成代码的表的信息
         for (String tableName : tableNames) {
+            basicData.setTableName(tableName);
             basicData.setClassName(StringUtility.getCamelCaseString(tableName, true, true));
             basicData.setClassVarName(StringUtility.getCamelCaseString(tableName, false, true));
             //获取表的字段信息
@@ -188,7 +189,6 @@ public class GenCodeServiceImpl implements GenCodeService {
 
     private String getPackagePath(TemplateBean templateModel, BasicDataBean bean) {
         return bean.getPackageName().replaceAll("\\.", "\\/")
-                + bean.getModuleName()
                 + (StringUtils.isNotEmpty(templateModel.getTemplatePath()) ? "/"
                 + templateModel.getTemplatePath().replaceAll("\\.", "\\/") : "");
     }

@@ -33,7 +33,15 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">模板路径</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="templatePath" name="templatePath" type="text">
+                                <select class="form-control" id="templatePath" name="templatePath">
+                                    <option value=""></option>
+                                    <option value="controller">controller</option>
+                                    <option value="service">service</option>
+                                    <option value="service.html">service.html</option>
+                                    <option value="mapper">mapper</option>
+                                    <option value="bean">bean</option>
+                                    <option value="model">model</option>
+                                </select>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

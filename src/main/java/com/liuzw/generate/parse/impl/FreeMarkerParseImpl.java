@@ -4,10 +4,12 @@ import com.liuzw.generate.bean.BasicDataBean;
 import com.liuzw.generate.bean.TemplateBean;
 import com.liuzw.generate.parse.Parse;
 import com.liuzw.generate.utils.CopyDataUtil;
+import com.liuzw.generate.utils.StringUtility;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.StringWriter;
 import java.io.Writer;

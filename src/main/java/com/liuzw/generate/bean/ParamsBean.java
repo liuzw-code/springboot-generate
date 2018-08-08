@@ -51,12 +51,6 @@ public class ParamsBean {
     @NotBlank(message = "包名不能为空")
     private String packageName;
 
-
-    /**
-     * 模块名
-     */
-    private String moduleName;
-
     /**
      * 本地路径
      */
