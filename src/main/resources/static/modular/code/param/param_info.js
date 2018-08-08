@@ -7,13 +7,13 @@ var GenParamInfoDlg = {
         name: {
             validators: {
                 notEmpty: {
-                    message: '别名不能为空'
+                    message: '名称不能为空'
                 },
                 stringLength: {
                     /*长度提示*/
                     min: 3,
                     max: 20,
-                    message: '别名长度必须在3到20之间'
+                    message: '名称长度必须在3到20之间'
                 }
             }
         },
@@ -26,25 +26,25 @@ var GenParamInfoDlg = {
                     /*长度提示*/
                     min: 3,
                     max: 20,
-                    message: '用户名长度必须在3到20之间'
+                    message: '作者长度必须在3到20之间'
                 }
             }
         },
         packageName: {
             validators: {
                 notEmpty: {
-                    message: '代码目录不能为空'
+                    message: '包名称不能为空'
                 },
                 regexp: {
                     /* 只需加此键值对，包含正则表达式，和提示 */
                     regexp: /^[a-zA-Z0-9\.]+$/,
-                    message: '只能是数字和字母和.'
+                    message: '包名称只能是数字和字母和.'
                 },
                 stringLength: {
                     /*长度提示*/
                     min: 1,
                     max: 100,
-                    message: '代码目录长度必须在1到100之间'
+                    message: '包名称长度必须在1到100之间'
                 }
             }
         }
@@ -132,9 +132,9 @@ GenParamInfoDlg.editSubmit = function () {
 
     this.clearData();
     this.collectData();
-    // if (!this.validate()) {
-    //     return;
-    // }
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Root.ctxPath + "/params/edit", function (data) {
         Root.success("修改成功!");

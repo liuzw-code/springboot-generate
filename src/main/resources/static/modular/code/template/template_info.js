@@ -2,7 +2,67 @@
  * 初始化模板管理详情对话框
  */
 var TemplateInfoDlg = {
-    TemplateInfoData: {}
+    TemplateInfoData: {},
+    validateFields: {
+        templateName: {
+            validators: {
+                notEmpty: {
+                    message: '模板名称不能为空'
+                },
+                stringLength: {
+                    /*长度提示*/
+                    min: 3,
+                    max: 20,
+                    message: '模板名称长度必须在3到20之间'
+                }
+            }
+        },
+        templateFileName: {
+            validators: {
+                notEmpty: {
+                    message: '模板文件名不能为空'
+                },
+                stringLength: {
+                    /*长度提示*/
+                    min: 3,
+                    max: 20,
+                    message: '模板文件名长度必须在3到20之间'
+                }
+            }
+        },
+        templatePath: {
+            validators: {
+                notEmpty: {
+                    message: '模板路径不能为空'
+                },
+                regexp: {
+                    /* 只需加此键值对，包含正则表达式，和提示 */
+                    regexp: /^[a-zA-Z\.]+$/,
+                    message: '只能是字母和.'
+                },
+                stringLength: {
+                    /*长度提示*/
+                    min: 1,
+                    max: 100,
+                    message: '模板路径长度必须在1到30之间'
+                }
+            }
+        },
+        templateType: {
+            validators: {
+                notEmpty: {
+                    message: '模板类型不能为空'
+                }
+            }
+        },
+        groupId: {
+            validators: {
+                notEmpty: {
+                    message: '模板组不能为空'
+                }
+            }
+        }
+    }
 };
 
 /**
@@ -50,6 +110,16 @@ TemplateInfoDlg.collectData = function () {
 
 };
 
+
+/**
+ * 验证数据
+ */
+TemplateInfoDlg.validate = function () {
+    $('#templateForm').data("bootstrapValidator").resetForm();
+    $('#templateForm').bootstrapValidator('validate');
+    return $("#templateForm").data('bootstrapValidator').isValid();
+};
+
 /**
  * 提交添加
  */
@@ -57,7 +127,9 @@ TemplateInfoDlg.addSubmit = function () {
 
     this.clearData();
     this.collectData();
-
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Root.ctxPath + "/template/add", function (data) {
         Root.success("添加成功!");
@@ -111,4 +183,8 @@ $("#templateContent").blur(function () {
     $(this).hide();
     $("#codeFile").find('code').html(hljs.highlight($("#templateType").val(), $(this).val()).value);
     $("#codeFile").show();
+});
+
+$(function () {
+    Root.initValidator("templateForm", TemplateInfoDlg.validateFields);
 });

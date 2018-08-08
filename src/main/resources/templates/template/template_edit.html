@@ -9,10 +9,8 @@
     <div class="ibox float-e-margins">
         <div class="ibox float-e-margins">
             <div class="ibox-content">
-                <div class="form-horizontal">
-
+                <div class="form-horizontal" id="templateForm">
                     <input type="hidden" id="id" th:value="${template.id}">
-
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -97,22 +95,20 @@
                             </pre>
                         </div>
                     </div>
-                </div>
-
-                <div class="row btn-group-m-t">
-                    <div class="col-sm-10">
-                        <button type="button" class="btn btn-info button-margin"
-                                onclick="TemplateInfoDlg.editSubmit()" id="ensure">
-                            <i class="fa fa-check"></i>&nbsp;提交
-                        </button>
-                        <button type="button" class="btn btn-danger button-margin"
-                                onclick="TemplateInfoDlg.close()" id="cancel">
-                            <i class="fa fa-eraser"></i>&nbsp;取消
-                        </button>
+                    <div class="row btn-group-m-t">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-info button-margin"
+                                    onclick="TemplateInfoDlg.editSubmit()" id="ensure">
+                                <i class="fa fa-check"></i>&nbsp;提交
+                            </button>
+                            <button type="button" class="btn btn-danger button-margin"
+                                    onclick="TemplateInfoDlg.close()" id="cancel">
+                                <i class="fa fa-eraser"></i>&nbsp;取消
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

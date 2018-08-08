@@ -1,35 +1,9 @@
 var GenInfo = {
     templateBtn: '<button type="button" class="list-group-item" value="id" onclick="GenInfo.selectTemplates(this.value)">templateName</button>',
     param: {
-        params : {},
+        params : {}
     },
     validateFields: {
-        className: {
-            validators: {
-                notEmpty: {
-                    message: '类名不能为空'
-                },
-                stringLength: {
-                    /*长度提示*/
-                    min: 3,
-                    max: 40,
-                    message: '类名长度必须在3到40之间'
-                }
-            }
-        },
-        name: {
-            validators: {
-                notEmpty: {
-                    message: '功能不能为空'
-                },
-                stringLength: {
-                    /*长度提示*/
-                    min: 3,
-                    max: 20,
-                    message: '功能长度必须在3到20之间'
-                }
-            }
-        },
         author: {
             validators: {
                 notEmpty: {
@@ -60,22 +34,7 @@ var GenInfo = {
                     message: '代码目录长度必须在1到100之间'
                 }
             }
-        },
-        moduleName: {
-            validators: {
-                regexp: {
-                    /* 只需加此键值对，包含正则表达式，和提示 */
-                    regexp: /^[a-zA-Z0-9_\-\.]+$/,
-                    message: '只能是数字和字母和-_.'
-                },
-                stringLength: {
-                    /*长度提示*/
-                    min: 0,
-                    max: 100,
-                    message: 'Js目录长度必须在1到100之间'
-                }
-            }
-        },
+        }
     }
 };
 
@@ -154,6 +113,9 @@ GenInfo.genBtnAble = function () {
 
 
 GenInfo.genCode = function () {
+    if (!GenInfo.param.templateIds) {
+        Root.error("请选择模板!");
+    }
     if (!this.validate()) {
         return;
     }
@@ -174,8 +136,6 @@ GenInfo.genCode = function () {
         "copyright": $("#copyright").val()
     };
 
-    //生成文件类名
-    GenInfo.param.className = $("#className").val();
     //数据库id
     GenInfo.param.databaseId = $("#databaseId").val();
     //本地生产就ajax访问后台就可以了
