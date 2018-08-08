@@ -4,15 +4,10 @@ package com.liuzw.generate.controller;
 import com.liuzw.generate.bean.*;
 import com.liuzw.generate.service.ParamsService;
 import com.liuzw.generate.utils.CopyDataUtil;
-import com.liuzw.generate.valid.Insert;
-import com.liuzw.generate.valid.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * 参数管理
@@ -20,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @author liuzw
  * @version V1.0
  **/
-@Validated
+
 @Controller
 @RequestMapping("/params")
 public class ParamsController extends BaseController {
@@ -51,7 +46,7 @@ public class ParamsController extends BaseController {
      * @param id 主键id
      */
     @GetMapping(value = "/edit/{id}")
-    public String paramUpdate(@NotNull(message = "id不能为空") @PathVariable("id") Long id, Model model) {
+    public String paramUpdate(@PathVariable("id") Long id, Model model) {
         ParamsBean bean = CopyDataUtil.copyObject(paramsService.getById(id), ParamsBean.class);
         model.addAttribute("params", bean);
         return "param/param_edit";
@@ -78,7 +73,7 @@ public class ParamsController extends BaseController {
      */
     @PostMapping(value = "/getById/{id}")
     @ResponseBody
-    public  ResultData<ParamsBean> getById(@NotNull(message = "id不能为空") @PathVariable("id") Long id) {
+    public  ResultData<ParamsBean> getById(@PathVariable("id") Long id) {
         ParamsBean bean = CopyDataUtil.copyObject(paramsService.getById(id), ParamsBean.class);
         return ResultData.createSelectSuccessResult(bean);
     }
@@ -91,7 +86,7 @@ public class ParamsController extends BaseController {
      */
     @PostMapping(value = "/add")
     @ResponseBody
-    public ResultData<ParamsBean> insert(@Validated(Insert.class) @RequestBody ParamsBean dto) {
+    public ResultData<ParamsBean> insert(@RequestBody ParamsBean dto) {
         return ResultData.createInsertResult(paramsService.insert(dto));
     }
 
@@ -103,7 +98,7 @@ public class ParamsController extends BaseController {
      */
     @PostMapping(value = "/edit")
     @ResponseBody
-    public ResultData<ParamsBean> update(@Validated(Update.class)@RequestBody ParamsBean dto) {
+    public ResultData<ParamsBean> update(@RequestBody ParamsBean dto) {
         return ResultData.createUpdateResult(paramsService.update(dto));
     }
 
@@ -116,7 +111,7 @@ public class ParamsController extends BaseController {
      */
     @PostMapping(value = "/remove")
     @ResponseBody
-    public ResultData<Void> delete(@NotNull(message = "id不能为空") @RequestBody IdBean id) {
+    public ResultData<Void> delete(@RequestBody IdBean id) {
         return ResultData.createDeleteResult(paramsService.delete(id.getId()));
     }
 

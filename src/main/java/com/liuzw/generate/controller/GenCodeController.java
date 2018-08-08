@@ -3,16 +3,16 @@ package com.liuzw.generate.controller;
 import com.liuzw.generate.aop.TargetDataSource;
 import com.liuzw.generate.bean.*;
 import com.liuzw.generate.service.*;
-import com.liuzw.generate.valid.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 代码生成
@@ -20,7 +20,7 @@ import java.util.List;
  * @author liuzw
  * @date 2018/8/1 15:42
  **/
-@Validated
+
 @Controller
 @RequestMapping("gen")
 public class GenCodeController extends BaseController {
@@ -52,13 +52,13 @@ public class GenCodeController extends BaseController {
     /**
      * 跳转到生成代码页面
      *
-     * @param databaseId  数据源 id
-     * @param tableNames  表名
+     * @param databaseId 数据源 id
+     * @param tableNames 表名
      */
     @GetMapping("/gen/{databaseId}/{tableNames}")
     public String genDetail(Model model,
-                 @NotNull(message = "数据源id不能为空") @PathVariable("databaseId") Long databaseId,
-                 @NotNull(message = "表名不能为空") @PathVariable("tableNames") String tableNames) {
+                            @PathVariable("databaseId") Long databaseId,
+                            @PathVariable("tableNames") String tableNames) {
         tableNames = tableNames.substring(0, tableNames.lastIndexOf(","));
         model.addAttribute("tableNames", tableNames);
         model.addAttribute("databaseId", databaseId);
@@ -67,7 +67,6 @@ public class GenCodeController extends BaseController {
 
         return "gen/gen_detail";
     }
-
 
 
     @TargetDataSource
@@ -79,10 +78,17 @@ public class GenCodeController extends BaseController {
     }
 
 
+    /**
+     * 生成代码到本地
+     *
+     * @param bean 基本参数
+     * @return ResultData<Boolean>
+     */
+
     @TargetDataSource
     @PostMapping("/genCode")
     @ResponseBody
-    public ResultData<Boolean> genCode(@Validated(Insert.class) @RequestBody GenCodeBean bean) {
+    public ResultData<Boolean> genCode(@RequestBody GenCodeBean bean) {
         Boolean flag = genCodeService.genCode(null, bean);
         if (flag) {
             return ResultData.createSuccessResult(null, "代码生成成功");
@@ -91,9 +97,30 @@ public class GenCodeController extends BaseController {
         }
     }
 
+    /**
+     * 下载代码
+     *
+     */
     @TargetDataSource
-    @GetMapping("/genCode")
-    public void genCode(HttpServletResponse response, GenCodeBean bean) {
+    @GetMapping("/downloadCode")
+    public void downloadCode(HttpServletRequest request, HttpServletResponse response) {
+
+        String tableName = request.getParameter("tableNames");
+        String templateIds = request.getParameter("templateIds");
+
+        ParamsBean param = ParamsBean.builder()
+                .author(request.getParameter("author"))
+                .copyright(request.getParameter("copyright"))
+                .packageName(request.getParameter("packageName"))
+                .build();
+
+        GenCodeBean bean = GenCodeBean.builder()
+                .databaseId(Long.valueOf(request.getParameter("databaseId")))
+                .params(param)
+                .tableNames(Arrays.stream(tableName.split(",")).collect(Collectors.toList()))
+                .templateIds(Arrays.stream(templateIds.split(",")).map(Long::valueOf).collect(Collectors.toList()))
+                .build();
+
         genCodeService.genCode(response, bean);
     }
 

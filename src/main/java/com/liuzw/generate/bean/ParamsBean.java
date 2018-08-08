@@ -27,14 +27,14 @@ public class ParamsBean {
     /**
      * id
      */
-    @NotNull(message = "id不能为空", groups = Update.class)
+
     private Long id;
 
 
     /**
      * 名称
      */
-    @NotBlank(message = "名称不能为空")
+
     private String name;
 
 

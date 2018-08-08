@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -23,29 +20,24 @@ import java.util.List;
 @NoArgsConstructor
 public class GenCodeBean {
 
+    /**
+     * 数据库连接信息 id
+     */
+    private Long databaseId;
 
     /**
      * 基本参数
      */
-    @Valid
     private ParamsBean params;
 
     /**
      * 模板id
      */
-    @NotNull(message = "模板id不能为空")
     private List<Long> templateIds;
 
     /**
      * 表
      */
-    @NotNull(message = "表名不能为空")
     private List<String> tableNames;
-
-    /**
-     * 数据库连接信息 id
-     */
-    @NotNull(message = "数据库连接信息id不能为空")
-    private Long databaseId;
 
 }

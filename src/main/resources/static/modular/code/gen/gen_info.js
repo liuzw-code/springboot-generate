@@ -129,7 +129,6 @@ GenInfo.genCode = function () {
     //基本参数
     GenInfo.param.params = {
         "author": $("#author").val(),
-        "name": $("#name").val(),
         "packageName": $("#packageName").val(),
         "localPath": $("#localPath").val(),
         "copyright": $("#copyright").val()
@@ -149,7 +148,13 @@ GenInfo.genCode = function () {
         ajax.setData(GenInfo.param);
         ajax.start();
     } else {
-        window.location.href = '/gen/genCode?' + $.param(GenInfo.param);
+        var params = "databaseId=" + $("#databaseId").val();
+        params += "&tableNames=" + $("#tableNames").val();
+        params += "&templateIds=" + GenInfo.param.templateIds.join(",");
+        params += "&author=" + $("#author").val();
+        params += "&packageName=" + $("#packageName").val();
+        params += "&copyright=" + $("#copyright").val();
+        window.location.href = '/gen/downloadCode?' + params;
     }
 
 };

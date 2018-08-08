@@ -73,7 +73,7 @@ public class GenCodeServiceImpl implements GenCodeService {
         //代码生成到本地路径
         String localPath = bean.getParams().getLocalPath();
 
-        if (StringUtils.isNotEmpty(localPath) && response == null) {
+        if (StringUtils.isNotEmpty(localPath) && response == null && isWindows()) {
             writeThisFileList(localPath, list, basicData);
         } else {
             downThisFileList(response, list, basicData);
@@ -192,5 +192,16 @@ public class GenCodeServiceImpl implements GenCodeService {
                 + (StringUtils.isNotEmpty(templateModel.getTemplatePath()) ? "/"
                 + templateModel.getTemplatePath().replaceAll("\\.", "\\/") : "");
     }
+
+
+    /**
+     * 判断当前系统是不是windows系统
+     *
+     * @return Boolean
+     */
+    public Boolean isWindows() {
+        return System.getProperties().getProperty("os.name").toUpperCase().contains("WINDOWS");
+    }
+
 
 }

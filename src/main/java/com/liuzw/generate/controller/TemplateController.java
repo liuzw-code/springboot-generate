@@ -5,15 +5,10 @@ import com.liuzw.generate.bean.*;
 import com.liuzw.generate.service.TemplateGroupService;
 import com.liuzw.generate.service.TemplateService;
 import com.liuzw.generate.utils.CopyDataUtil;
-import com.liuzw.generate.valid.Insert;
-import com.liuzw.generate.valid.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * 模板管理
@@ -21,7 +16,6 @@ import javax.validation.constraints.NotNull;
  * @author liuzw
  * @version V1.0
  **/
-@Validated
 @Controller
 @RequestMapping("/template")
 public class TemplateController extends BaseController {
@@ -57,7 +51,7 @@ public class TemplateController extends BaseController {
      * 跳转到 模板修改 页面
      */
     @GetMapping("/edit/{id}")
-    public String templateUpdate(@NotNull(message = "id不能为空") @PathVariable("id") Long id, Model model) {
+    public String templateUpdate(@PathVariable("id") Long id, Model model) {
         TemplateBean bean = CopyDataUtil.copyObject(templateService.getById(id), TemplateBean.class);
         model.addAttribute("group", templateGroupService.getList());
         model.addAttribute("template", bean);
@@ -86,7 +80,7 @@ public class TemplateController extends BaseController {
      */
     @PostMapping(value = "/add")
     @ResponseBody
-    public ResultData<TemplateBean> insert(@Validated(Insert.class) @RequestBody TemplateBean dto) {
+    public ResultData<TemplateBean> insert(@RequestBody TemplateBean dto) {
         return ResultData.createInsertResult(templateService.insert(dto));
     }
 
@@ -98,7 +92,7 @@ public class TemplateController extends BaseController {
      */
     @PostMapping(value = "/edit")
     @ResponseBody
-    public ResultData<TemplateBean> update(@Validated(Update.class) @RequestBody TemplateBean dto) {
+    public ResultData<TemplateBean> update( @RequestBody TemplateBean dto) {
         return ResultData.createUpdateResult(templateService.update(dto));
     }
 
@@ -111,7 +105,7 @@ public class TemplateController extends BaseController {
      */
     @PostMapping(value = "/remove")
     @ResponseBody
-    public ResultData<Void> delete(@NotNull(message = "id不能为空") @RequestBody IdBean id) {
+    public ResultData<Void> delete(@RequestBody IdBean id) {
         return ResultData.createDeleteResult(templateService.delete(id.getId()));
     }
 

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,13 +49,16 @@ public class DynamicDataSourceAspect {
             return ResultData.createErrorResult("参数不能为空");
         }
         Object obj = args[0];
-        Long databaseId = null;
+        Long databaseId;
         if (obj instanceof GenQueryBean) {
             GenQueryBean bean = (GenQueryBean)obj;
             databaseId = bean.getId();
         } else if (obj instanceof GenCodeBean) {
             GenCodeBean bean = (GenCodeBean) obj;
             databaseId = bean.getDatabaseId();
+        } else {
+            HttpServletRequest request = (HttpServletRequest) obj;
+            databaseId = Long.valueOf(request.getParameter("databaseId"));
         }
 
         if (databaseId == null) {
