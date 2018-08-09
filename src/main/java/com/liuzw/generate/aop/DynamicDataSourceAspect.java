@@ -98,6 +98,8 @@ public class DynamicDataSourceAspect {
                 "?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false");
         dynamicDataSource.setUsername(dbInfo.getDbUsername());
         dynamicDataSource.setPassword(dbInfo.getDbPassword());
+        //设置失败重连次数
+        dynamicDataSource.setConnectionErrorRetryAttempts(3);
         //拿到动态切换数据源对象
         DynamicRoutingDataSource dynamicRoutingDataSource = DynamicRoutingDataSource.getInstance();
         Map<Object, Object> dataSourceMap = new HashMap<>(3);
