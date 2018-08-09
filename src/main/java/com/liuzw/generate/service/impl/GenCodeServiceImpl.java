@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -49,23 +50,34 @@ public class GenCodeServiceImpl implements GenCodeService {
         List<String> tableNames = bean.getTableNames();
         //设置基本参数
         BasicDataBean basicData = BasicDataBean.get(bean.getParams());
-
+        //切换数据源，查询模板信息
         DynamicDataSourceContextHolder.setDataSourceKey("default");
         //1.获取模板内容
         List<TemplateBean> templateList = templateMapper.getTemplateComment(bean.getTemplateIds());
         if (templateList == null || templateList.size() == 0) {
             return false;
         }
-
+        //切换数据源，查询选择的表的信息
         DynamicDataSourceContextHolder.setDataSourceKey("dynamic");
-        List<TemplateBean> list = new ArrayList<>();
         //2.获取要生成代码的表的信息
+        log.info("------------->获取表的字段信息");
+        //表中所有字段的全部信息
+        List<ColumnBean> columns = columnService.getTableAllColumns(tableNames);
+        //处理数据
+        getList(columns);
+        //获取表的主键
+        List<ColumnBean> pkColumns = columnService.getTablePkColumns(tableNames);
+        //处理数据
+        getList(pkColumns);
+
+        List<TemplateBean> list = new ArrayList<>();
+        //3.开始处理模板生成代码
         for (String tableName : tableNames) {
+            basicData.setColumns(columns.stream().filter(columnBean -> columnBean.getTableName().equals(tableName)).collect(Collectors.toList()));
+            basicData.setPkColumns(pkColumns.stream().filter(columnBean -> columnBean.getTableName().equals(tableName)).collect(Collectors.toList()));
             basicData.setTableName(tableName);
             basicData.setClassName(StringUtility.getCamelCaseString(tableName, true, true));
             basicData.setClassVarName(StringUtility.getCamelCaseString(tableName, false, true));
-            //获取表的字段信息
-            getTableInfo(basicData, tableName);
             //获取解析后的模板内容
             list.addAll(getTemplateComment(basicData, templateList, TemplateEnum.FREEMARKER));
         }
@@ -86,16 +98,8 @@ public class GenCodeServiceImpl implements GenCodeService {
     /**
      * 获取表的字段信息
      */
-    private void getTableInfo(BasicDataBean basicData, String tableNames) {
-        log.info("------------->获取表的字段信息");
-        //表中所有字段的全部信息
-        List<ColumnBean> columns = columnService.getTableAllColumns(tableNames);
-        getList(columns);
-        basicData.setColumns(columns);
-        //获取表的主键
-        List<ColumnBean> pkColumns = columnService.getTablePkColumns(tableNames);
-        getList(pkColumns);
-        basicData.setPkColumns(pkColumns);
+    private void getTableInfo(BasicDataBean basicData, List<String> tableNames) {
+
     }
 
     /**

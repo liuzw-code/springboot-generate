@@ -26,13 +26,13 @@ public class ColumnServiceImpl implements ColumnService {
     private ColumnMapper columnMapper;
 
     @Override
-    public List<ColumnBean> getTableAllColumns(String tableName) {
-        return columnMapper.getTableAllColumns(tableName);
+    public List<ColumnBean> getTableAllColumns(List<String> tableNames) {
+        return columnMapper.getTableAllColumns(tableNames);
     }
 
     @Override
-    public List<ColumnBean> getTablePkColumns(String tableName) {
-        return columnMapper.getTablePkColumns(tableName);
+    public List<ColumnBean> getTablePkColumns(List<String> tableNames) {
+        return columnMapper.getTablePkColumns(tableNames);
     }
 
     @Override

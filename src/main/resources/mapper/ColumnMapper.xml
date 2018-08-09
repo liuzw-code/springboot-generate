@@ -9,24 +9,31 @@
         <result column="column_comment" jdbcType="VARCHAR" property="columnComment" />
         <result column="column_type" jdbcType="VARCHAR" property="columnType" />
         <result column="is_nullable" jdbcType="VARCHAR" property="isNullable" />
+        <result column="table_name" jdbcType="VARCHAR" property="tableName" />
     </resultMap>
 
     <select id="getTableAllColumns" resultMap="BaseResultMap">
-        select column_name,data_type column_type,column_comment,is_nullable
+        select column_name,data_type column_type,column_comment,is_nullable,table_name
         from information_schema.columns
-        where upper(table_name) = upper(#{tableName,jdbcType=VARCHAR})
-        and table_schema = (select database())
-        order by ordinal_position
+        where table_schema = (select database())
+        and upper(table_name) in
+        <foreach collection="tableNames" item="tableName" separator="," open="(" close=")">
+            upper(#{tableName,jdbcType=VARCHAR})
+        </foreach>
+        order by table_name
 
     </select>
 
     <select id="getTablePkColumns" resultMap="BaseResultMap">
-        select column_name,data_type as column_type,column_comment
+        select column_name,data_type as column_type,column_comment,table_name
         from information_schema.columns
-        where upper(table_name) = upper(#{tableName,jdbcType = VARCHAR})
-        and table_schema = (select database())
+        where table_schema = (select database())
+        and upper(table_name) in
+        <foreach collection="tableNames" item="tableName" separator="," open="(" close=")">
+            upper(#{tableName,jdbcType=VARCHAR})
+        </foreach>
         and column_key='pri'
-        order by ordinal_position
+        order by table_name
     </select>
 
     <select id="getList" resultType="com.liuzw.generate.bean.TableBean">

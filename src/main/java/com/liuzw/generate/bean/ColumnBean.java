@@ -16,6 +16,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ColumnBean {
 
+    /**
+     * 表名
+     */
+    private String tableName;
 
     /**
      * 字段名称

@@ -15,18 +15,18 @@ public interface ColumnService {
 	/**
      * 获取表的所有字段
 	 *
-	 * @param tableName 表名
+	 * @param tableNames 表名
 	 * @return List
 	 */
-	List<ColumnBean> getTableAllColumns(String tableName);
+	List<ColumnBean> getTableAllColumns(List<String> tableNames);
 
 	/**
      * 获取表的主键
 	 *
-	 * @param tableName 表名
+	 * @param tableNames 表名
 	 * @return List
 	 */
-	List<ColumnBean> getTablePkColumns(String tableName);
+	List<ColumnBean> getTablePkColumns(List<String> tableNames);
 
 	/**
      * 获取数据库中的表的信息
