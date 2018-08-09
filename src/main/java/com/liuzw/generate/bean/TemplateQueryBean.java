@@ -34,4 +34,9 @@ public class TemplateQueryBean extends BasePage {
      */
     private Long groupId;
 
+    /**
+     * 模板引擎类型
+     */
+    private String templateEngineType;
+
 }

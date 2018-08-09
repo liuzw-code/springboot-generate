@@ -10,7 +10,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>模板组管理</h5>
+                    <h5>模板引擎管理</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row row-lg">
@@ -23,7 +23,7 @@
                                                     type="button">名称
                                             </button>
                                         </div>
-                                        <input type="text" class="form-control" id="groupName"
+                                        <input type="text" class="form-control" id="engineName"
                                                placeholder=""/>
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                                                     type="button">描述
                                             </button>
                                         </div>
-                                        <input type="text" class="form-control" id="groupDesc"
+                                        <input type="text" class="form-control" id="engineDesc"
                                                placeholder=""/>
                                     </div>
                                 </div>
@@ -46,13 +46,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hidden-xs" id="TemplateGroupTableToolbar" role="group">
+                        <div class="hidden-xs" id="TemplateEngineTableToolbar" role="group">
                             <button type="button" class="btn btn-primary button-margin"
-                                    onclick="TemplateEngine.openAddTemplateGroup()">
+                                    onclick="TemplateEngine.openAddTemplateEngine()">
                                 <i class="fa fa-plus"></i>&nbsp;添加
                             </button>
                             <button type="button" class="btn btn-primary button-margin"
-                                    onclick="TemplateEngine.openTemplateGroupDetail()">
+                                    onclick="TemplateEngine.openTemplateEngineDetail()">
                                 <i class="fa fa-plus"></i>&nbsp;修改
                             </button>
                             <button type="button" class="btn btn-danger button-margin"
@@ -60,7 +60,7 @@
                                 <i class="fa fa-minus"></i>&nbsp;删除
                             </button>
                         </div>
-                        <table id="TemplateGroupTable" data-mobile-responsive="true" data-click-to-select="true">
+                        <table id="TemplateEngineTable" data-mobile-responsive="true" data-click-to-select="true">
                             <thead>
                             <tr>
                                 <th data-field="selectItem" data-checkbox="true"></th>
@@ -74,4 +74,4 @@
     </div>
 </div>
 </body>
-<script th:src="@{/modular/code/group/templategroup.js}"></script>
+<script th:src="@{/modular/code/engine/templateEngine.js}"></script>

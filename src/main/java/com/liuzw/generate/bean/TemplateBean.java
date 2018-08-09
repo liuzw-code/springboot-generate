@@ -20,11 +20,10 @@ public class TemplateBean {
 
 
     /**
-     *
+     * id
      */
 
     private Long id;
-
 
     /**
      * 模板名称
@@ -36,6 +35,10 @@ public class TemplateBean {
      */
     private String templateType;
 
+    /**
+     * 模板引擎类型
+     */
+    private String templateEngineType;
 
     /**
      * 模板描述
@@ -48,32 +51,29 @@ public class TemplateBean {
     private String templateContent;
 
     /**
-     * 组
+     * 组id
      */
     private Long groupId;
 
-
     /**
-     * 组
+     * 组名称
      */
     private String groupName;
 
     /**
-     * 模板路径 如 /service
+     * 模板路径 如 service
      */
     private String templatePath;
 
     /**
-     * 生成模板名称 如 /service
+     * 生成模板名称 如 service
      */
     private String templateFileName;
-
 
     /**
      * 创建时间
      */
     private String createTime;
-
 
     /**
      * 修改时间

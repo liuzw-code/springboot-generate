@@ -2,6 +2,7 @@ package com.liuzw.generate.controller;
 
 
 import com.liuzw.generate.bean.*;
+import com.liuzw.generate.service.TemplateEngineService;
 import com.liuzw.generate.service.TemplateGroupService;
 import com.liuzw.generate.service.TemplateService;
 import com.liuzw.generate.utils.CopyDataUtil;
@@ -25,7 +26,8 @@ public class TemplateController extends BaseController {
 
     @Autowired
     private TemplateGroupService templateGroupService;
-
+    @Autowired
+    private TemplateEngineService templateEngineService;
 
     /**
      * 跳转到 模板管理 页面
@@ -33,6 +35,7 @@ public class TemplateController extends BaseController {
     @GetMapping("/info")
     public String template(Model model) {
         model.addAttribute("group", templateGroupService.getList());
+        model.addAttribute("engine", templateEngineService.getList());
         return "template/template";
     }
 
@@ -42,7 +45,8 @@ public class TemplateController extends BaseController {
      */
     @GetMapping("/add")
     public String templateAdd(Model model) {
-        model.addAttribute("group", templateGroupService.getList(new TemplateGroupQueryBean()));
+        model.addAttribute("group", templateGroupService.getList());
+        model.addAttribute("engine", templateEngineService.getList());
         return "template/template_add";
     }
 
@@ -54,6 +58,7 @@ public class TemplateController extends BaseController {
     public String templateUpdate(@PathVariable("id") Long id, Model model) {
         TemplateBean bean = CopyDataUtil.copyObject(templateService.getById(id), TemplateBean.class);
         model.addAttribute("group", templateGroupService.getList());
+        model.addAttribute("engine", templateEngineService.getList());
         model.addAttribute("template", bean);
         return "template/template_edit";
     }

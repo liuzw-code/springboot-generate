@@ -199,7 +199,7 @@ public class GenCodeServiceImpl implements GenCodeService {
      *
      * @return Boolean
      */
-    public Boolean isWindows() {
+    private Boolean isWindows() {
         return System.getProperties().getProperty("os.name").toUpperCase().contains("WINDOWS");
     }
 

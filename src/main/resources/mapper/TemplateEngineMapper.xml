@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liuzw.generate.mapper.TemplateEngineMapper">
+
+    <resultMap id="BaseResultMap" type="com.liuzw.generate.bean.TemplateEngineBean">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="engine_name" jdbcType="VARCHAR" property="engineName"/>
+        <result column="engine_desc" jdbcType="VARCHAR" property="engineDesc"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        engine_name,
+        engine_desc,
+        create_time,
+        update_time
+    </sql>
+
+</mapper>

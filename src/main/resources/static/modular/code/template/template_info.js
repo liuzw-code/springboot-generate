@@ -61,6 +61,13 @@ var TemplateInfoDlg = {
                     message: '模板组不能为空'
                 }
             }
+        },
+        templateEngineType: {
+            validators: {
+                notEmpty: {
+                    message: '模板引擎类型不能为空'
+                }
+            }
         }
     }
 };
@@ -105,7 +112,7 @@ TemplateInfoDlg.close = function () {
  * 收集数据
  */
 TemplateInfoDlg.collectData = function () {
-    this.set('id').set('templateName').set('templateDesc').set('templateFileName')
+    this.set('id').set('templateName').set('templateDesc').set('templateFileName').set('templateEngineType')
         .set('groupId').set('templateType').set('templatePath').set("templateContent");
 
 };
@@ -162,12 +169,6 @@ TemplateInfoDlg.editSubmit = function () {
     ajax.start();
 };
 
-$(function () {
-    var type = $("#templateType").val().trim();
-    type = type === '' ? 'java' : type;
-    $("#codeFile").find('code').html(hljs.highlight(type, $("#templateContent").val()).value);
-});
-
 $("#codeFile").click(function () {
     $(this).hide();
     $("#templateContent").show();
@@ -181,10 +182,15 @@ $("#templateType").change(function () {
 
 $("#templateContent").blur(function () {
     $(this).hide();
-    $("#codeFile").find('code').html(hljs.highlight($("#templateType").val(), $(this).val()).value);
+    var type = $("#templateType").val().trim();
+    type = type === '' ? 'java' : type;
+    $("#codeFile").find('code').html(hljs.highlight(type, $(this).val()).value);
     $("#codeFile").show();
 });
 
 $(function () {
     Root.initValidator("templateForm", TemplateInfoDlg.validateFields);
+    var type = $("#templateType").val().trim();
+    type = type === '' ? 'java' : type;
+    $("#codeFile").find('code').html(hljs.highlight(type, $("#templateContent").val()).value);
 });

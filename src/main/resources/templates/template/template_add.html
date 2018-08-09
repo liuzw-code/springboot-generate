@@ -10,7 +10,7 @@
         <div class="ibox-content">
             <div class="form-horizontal" id="templateForm">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">名称</label>
                             <div class="col-sm-9">
@@ -20,7 +20,7 @@
                         <div class="hr-line-dashed"></div>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">描述</label>
                             <div class="col-sm-9">
@@ -29,7 +29,21 @@
                         </div>
                         <div class="hr-line-dashed"></div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4  b-r">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">引擎类型</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="templateEngineType">
+                                    <option></option>
+                                    <option  th:each="list : ${engine}"
+                                             th:value="${list.engineName}"
+                                             th:text="${list.engineName}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">模板路径</label>
                             <div class="col-sm-9">
@@ -48,7 +62,7 @@
                         </div>
                         <div class="hr-line-dashed"></div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">生成文件名</label>
                             <div class="col-sm-9">
@@ -57,7 +71,7 @@
                         </div>
                         <div class="hr-line-dashed"></div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">语言</label>
                             <div class="col-sm-9">
@@ -73,7 +87,7 @@
                         </div>
                         <div class="hr-line-dashed"></div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">组</label>
                             <div class="col-sm-9">
@@ -91,7 +105,6 @@
                         <textarea id="templateContent" name="templateContent" class="form-control"rows="15"></textarea>
                         <pre id="codeFile" style="display:none;height: 310px;">
                             <code>
-
                             </code>
                         </pre>
                     </div>

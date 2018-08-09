@@ -45,6 +45,12 @@ public class TemplateModel {
     private String templateType;
 
     /**
+     * 模板引擎类型
+     */
+    @Column(name = "template_engine_type")
+    private String templateEngineType;
+
+    /**
      * 模板描述
      */
     @Column(name = "template_desc")

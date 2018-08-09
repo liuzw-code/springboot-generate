@@ -8,6 +8,7 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="template_name" jdbcType="VARCHAR" property="templateName"/>
         <result column="template_type" jdbcType="VARCHAR" property="templateType"/>
+        <result column="template_engine_type" jdbcType="VARCHAR" property="templateEngineType"/>
         <result column="template_desc" jdbcType="VARCHAR" property="templateDesc"/>
         <result column="template_content" jdbcType="VARCHAR" property="templateContent"/>
         <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
@@ -20,12 +21,15 @@
 
     <select id="getList" resultMap="BaseResultMap">
         select t.id,t.template_name,t.template_desc, t.template_path, t.template_file_name,
-        t.template_type,t2.group_name,t.create_time,t.update_time
+        t.template_type,t.template_engine_type,t2.group_name,t.create_time,t.update_time
         from t_code_template t
         left join t_code_template_group t2 on t.group_id = t2.id
         <where>
             <if test="templateName != null and templateName != ''">
                 and t.template_name like  concat('%', #{templateName, jdbcType = VARCHAR}, '%')
+            </if>
+            <if test="templateEngineType != null and templateEngineType != ''">
+                and t.template_engine_type = #{templateEngineType, jdbcType = VARCHAR}
             </if>
             <if test="templateType != null and templateType != ''">
                 and t.template_type = #{templateType, jdbcType = VARCHAR}

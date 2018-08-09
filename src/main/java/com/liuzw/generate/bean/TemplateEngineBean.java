@@ -16,51 +16,29 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ParamsBean {
+public class TemplateEngineBean {
 
 
     /**
      * id
      */
-
     private Long id;
 
 
     /**
-     * 名称
+     * 模板引擎名称
      */
-
-    private String name;
-
+    private String engineName;
 
     /**
-     * 作者
+     * 模板引擎描述
      */
-    private String author;
-
-
-    /**
-     * 包名
-     */
-    private String packageName;
-
-    /**
-     * 本地路径
-     */
-    private String localPath;
-
-
-    /**
-     * 版权信息
-     */
-    private String copyright;
-
+    private String engineDesc;
 
     /**
      * 创建时间
      */
     private String createTime;
-
 
     /**
      * 创建时间

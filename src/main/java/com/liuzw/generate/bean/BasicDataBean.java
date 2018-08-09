@@ -39,11 +39,6 @@ public class BasicDataBean {
 	private String packageName;
 
 	/**
-	 * 类路径
-	 */
-	private String classPath;
-
-	/**
 	 * 作者
 	 */
 	private String author;

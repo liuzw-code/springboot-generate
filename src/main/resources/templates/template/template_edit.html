@@ -33,6 +33,22 @@
                             </div>
                             <div class="hr-line-dashed"></div>
                         </div>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
+                                            type="button">模板引擎类型
+                                    </button>
+                                </div>
+                                <select class="form-control" id="templateEngineType">
+                                    <option></option>
+                                    <option  th:each="list : ${engine}"
+                                             th:value="${list.engineName}"
+                                             th:text="${list.engineName}"
+                                             th:selected="${template.templateEngineType eq list.engineName}"></option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">模板路径</label>

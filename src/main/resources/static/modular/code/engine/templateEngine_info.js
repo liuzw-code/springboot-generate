@@ -1,17 +1,17 @@
 /**
  * 初始化详情对话框
  */
-var TemplateGroupInfoDlg = {
-    TemplateGroupInfoData: {},
+var TemplateEngineInfoDlg = {
+    TemplateEngineInfoData: {},
     validateFields: {
-        groupName: {
+        engineName: {
             validators: {
                 notEmpty: {
                     message: '名称不能为空'
                 }
             }
         },
-        groupDesc: {
+        engineDesc: {
             validators: {
                 notEmpty: {
                     message: '描述不能为空'
@@ -24,8 +24,8 @@ var TemplateGroupInfoDlg = {
 /**
  * 清除数据
  */
-TemplateGroupInfoDlg.clearData = function () {
-    this.TemplateGroupInfoData = {};
+TemplateEngineInfoDlg.clearData = function () {
+    this.TemplateEngineInfoData = {};
 };
 
 /**
@@ -34,10 +34,10 @@ TemplateGroupInfoDlg.clearData = function () {
  * @param key 数据的名称
  * @param val 数据的具体值
  */
-TemplateGroupInfoDlg.set = function (key) {
+TemplateEngineInfoDlg.set = function (key) {
     var v = this.get(key);
     if (typeof v !== "undefined") {
-        this.TemplateGroupInfoData[key] = v;
+        this.TemplateEngineInfoData[key] = v;
     }
     return this;
 };
@@ -47,37 +47,37 @@ TemplateGroupInfoDlg.set = function (key) {
  *
  * @param key 数据的名称
  */
-TemplateGroupInfoDlg.get = function (key) {
+TemplateEngineInfoDlg.get = function (key) {
     return $("#" + key).val();
 };
 
 /**
  * 关闭此对话框
  */
-TemplateGroupInfoDlg.close = function () {
+TemplateEngineInfoDlg.close = function () {
     parent.layer.close(window.parent.TemplateEngine.layerIndex);
 };
 
 /**
  * 收集数据
  */
-TemplateGroupInfoDlg.collectData = function () {
-    this.set('id').set("groupName").set("groupDesc");
+TemplateEngineInfoDlg.collectData = function () {
+    this.set('id').set("engineName").set("engineDesc");
 };
 
 /**
  * 验证数据是否为空
  */
-TemplateGroupInfoDlg.validate = function () {
-    $('#templateGroupForm').data("bootstrapValidator").resetForm();
-    $('#templateGroupForm').bootstrapValidator('validate');
-    return $("#templateGroupForm").data('bootstrapValidator').isValid();
+TemplateEngineInfoDlg.validate = function () {
+    $('#templateEngineForm').data("bootstrapValidator").resetForm();
+    $('#templateEngineForm').bootstrapValidator('validate');
+    return $("#templateEngineForm").data('bootstrapValidator').isValid();
 };
 
 /**
  * 提交添加
  */
-TemplateGroupInfoDlg.addSubmit = function () {
+TemplateEngineInfoDlg.addSubmit = function () {
 
     this.clearData();
     this.collectData();
@@ -86,21 +86,21 @@ TemplateGroupInfoDlg.addSubmit = function () {
     }
 
     //提交信息
-    var ajax = new $ax(Root.ctxPath + "/templateGroup/add", function (data) {
+    var ajax = new $ax(Root.ctxPath + "/templateEngine/add", function (data) {
         Root.success("添加成功!");
         window.parent.TemplateEngine.table.refresh();
-        TemplateGroupInfoDlg.close();
+        TemplateEngineInfoDlg.close();
     }, function (data) {
         Root.error("添加失败!" + data.message + "!");
     });
-    ajax.setData(this.TemplateGroupInfoData);
+    ajax.setData(this.TemplateEngineInfoData);
     ajax.start();
 }
 
 /**
  * 提交修改
  */
-TemplateGroupInfoDlg.editSubmit = function () {
+TemplateEngineInfoDlg.editSubmit = function () {
 
     this.clearData();
     this.collectData();
@@ -109,17 +109,17 @@ TemplateGroupInfoDlg.editSubmit = function () {
     }
 
     //提交信息
-    var ajax = new $ax(Root.ctxPath + "/templateGroup/edit", function (data) {
+    var ajax = new $ax(Root.ctxPath + "/templateEngine/edit", function (data) {
         Root.success("修改成功!");
         window.parent.TemplateEngine.table.refresh();
-        TemplateGroupInfoDlg.close();
+        TemplateEngineInfoDlg.close();
     }, function (data) {
         Root.error("修改失败!" + data.message + "!");
     });
-    ajax.setData(this.TemplateGroupInfoData);
+    ajax.setData(this.TemplateEngineInfoData);
     ajax.start();
 }
 
 $(function () {
-    Root.initValidator("templateGroupForm", TemplateGroupInfoDlg.validateFields);
+    Root.initValidator("templateEngineForm", TemplateEngineInfoDlg.validateFields);
 });

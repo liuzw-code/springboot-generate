@@ -17,6 +17,7 @@ Template.initColumn = function () {
         {title: '模板名称', field: 'templateName', align: 'center', valign: 'middle'},
         {title: '模板类型', field: 'templateType', align: 'center', valign: 'middle'},
         {title: '模板组', field: 'groupName', align: 'center', valign: 'middle'},
+        {title: '模板引擎类型', field: 'templateEngineType', align: 'center', valign: 'middle'},
         {title: '模板描述', field: 'templateDesc', align: 'center', valign: 'middle'},
         {title: '模板路径', field: 'templatePath', align: 'center', valign: 'middle'},
         {title: '生成文件名字', field: 'templateFileName', align: 'center', valign: 'middle'},
@@ -100,6 +101,7 @@ Template.search = function () {
     var queryData = {};
     queryData['templateName'] = $("#templateName").val();
     queryData['templateType'] = $("#templateType").val();
+    queryData['templateEngineType'] = $("#templateEngineType").val();
     queryData['groupId'] = $("#groupId").val();
     Template.table.refresh({query: queryData});
 };

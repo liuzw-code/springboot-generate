@@ -16,7 +16,7 @@
                     <div class="row row-lg">
                         <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                 <div class="input-group">
                                     <div class="input-group-btn">
                                         <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
@@ -28,7 +28,7 @@
                                 </div>
                             </div>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <div class="input-group">
                                         <div class="input-group-btn">
                                             <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
@@ -45,8 +45,22 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
+                                                    type="button">模板引擎类型
+                                            </button>
+                                        </div>
+                                        <select class="form-control" id="templateEngineType">
+                                            <option></option>
+                                            <option  th:each="list : ${engine}"
+                                                     th:value="${list.engineName}"
+                                                     th:text="${list.engineName}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
                                     <div class="input-group">
                                         <div class="input-group-btn">
                                             <button data-toggle="dropdown" class="btn btn-white dropdown-toggle"
