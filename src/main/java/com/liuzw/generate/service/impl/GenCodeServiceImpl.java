@@ -95,12 +95,6 @@ public class GenCodeServiceImpl implements GenCodeService {
     }
 
 
-    /**
-     * 获取表的字段信息
-     */
-    private void getTableInfo(BasicDataBean basicData, List<String> tableNames) {
-
-    }
 
     /**
      * 获取模板解析后内容
