@@ -8,7 +8,6 @@ import com.liuzw.generate.config.DynamicDataSourceContextHolder;
 import com.liuzw.generate.config.DynamicRoutingDataSource;
 import com.liuzw.generate.model.DatabaseInfoModel;
 import com.liuzw.generate.service.DatabaseInfoService;
-import com.sun.tools.javac.util.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
