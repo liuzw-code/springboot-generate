@@ -73,7 +73,7 @@ public class DynamicDataSourceAspect {
         } catch (Exception e) {
             return ResultData.createErrorResult("数据源连接异常");
         } catch (Throwable throwable) {
-            log.error("error.....", throwable.getMessage());
+            log.error("error.....", throwable);
         } finally {
             //恢复数据源
             restoreDataSource();
@@ -88,7 +88,9 @@ public class DynamicDataSourceAspect {
         log.info("------------->开始切换数据源");
         //从数据库获取数据库连接信息
         DatabaseInfoModel dbInfo = databaseInfoService.getById(id);
-        Assert.checkNonNull(dbInfo, "取数据库连接信息失败");
+        if (dbInfo == null) {
+            throw new RuntimeException("获取数据源异常");
+        }
         log.info("--------->数据库连接信息，url[{}], driver[{}],用户名[{}]", dbInfo.getDbUrl(), dbInfo.getDbDriver(), dbInfo.getDbUsername());
         //动态创建数据库连接
         DruidDataSource dynamicDataSource = new DruidDataSource();
