@@ -73,7 +73,7 @@
 
     1. 模板目前只支持Freemarker模板。
     2. 模板中的参数有哪些.
-    3. 如何扩展,使其支持其他模板引擎,后面会说到
+    3. 如何扩展如何扩展（待定）
 
 
 * 模板中的参数
@@ -83,25 +83,29 @@
 
     |     参数      |   类型  |  说明           |
     |  -------------| -------   | ------------   |
-    | `tableName`   |  String   |  表名           |
-    | `className`   |  String   |  类名           |
-    | `classVarName`|  String   |  类变量名      |
-    | `packageName` |  String   |  包名          |
-    | `author`      |  String   |  作者            |
-    | `copyright`   |  String   |  版权信息        |
-    | `columns`     |  List<ColumnBean>   |  字段列(包含主键) |
-    | `pkColumns`   |  List<ColumnBean>   |  主键列表        |
+    | `tableName`   |  `String`   |  表名           |
+    | `className`   |  `String`   |  类名           |
+    | `classVarName`|  `String`   |  类变量名      |
+    | `packageName` |  `String`   |  包名          |
+    | `author`      |  `String`   |  作者            |
+    | `copyright`   |  `String`   |  版权信息        |
+    | `columns`     |  `List<ColumnBean>`   |  字段列(包含主键) |
+    | `pkColumns`   |  `List<ColumnBean>`   |  主键列表        |
 
 
     其中`ColumnBean` 参数为
 
     |        参数           |   类型    |  说明             |
     |  --------------      | -------   | ------------     |
-    | `columnName`         |  String   |  数据库字段名称    |
-    | `columnType`         |  String   |  数据库字段类型    |
-    | `columnComment`      |  String   |  字段描述内容      |
-    | `javaFieldName`      |  String   |  java属性名称      |
-    | `javaType`           |  String   |  java类型          |
-    | `javaFieldComment`   |  String   |  java属性注释内容  |
-    | `jdbcType`           |  String   |  数据库字段类型    |
-    | `isNullable`         |  String   |  是否必填          |
+    | `columnName`         |  `String`   |  数据库字段名称    |
+    | `columnType`         |  `String`   |  数据库字段类型    |
+    | `columnComment`      |  `String`   |  字段描述内容      |
+    | `javaFieldName`      |  `String`   |  java属性名称      |
+    | `javaType`           |  `String`   |  java类型          |
+    | `javaFieldComment`   |  `String`   |  java属性注释内容  |
+    | `jdbcType`           |  `String`   |  数据库字段类型    |
+    | `isNullable`         |  `String`   |  是否必填          |
+    
+    
+    
+    
