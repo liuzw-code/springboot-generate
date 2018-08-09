@@ -9,7 +9,7 @@
     var BSTable = function (bstableId, url, columns) {
         this.btInstance = null;					//jquery和BootStrapTable绑定的对象
         this.bstableId = bstableId;
-        this.url = Root.ctxPath + url;
+        this.url = url;
         this.method = "post";
         this.paginationType = "client";			//默认分页方式是服务器分页,可选项"client"
         this.toolbarId = bstableId + "Toolbar";

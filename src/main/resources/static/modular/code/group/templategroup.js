@@ -101,7 +101,7 @@ TemplateGroup.search = function () {
 
 $(function () {
     var defaultColunms = TemplateGroup.initColumn();
-    var table = new BSTable(TemplateGroup.id, "/templateGroup/list", defaultColunms);
+    var table = new BSTable(TemplateGroup.id, Root.ctxPath + "/templateGroup/list", defaultColunms);
     table.setPaginationType("server");
     table.setQueryParams(TemplateGroup.formParams());
     TemplateGroup.table = table.init();

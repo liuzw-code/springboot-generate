@@ -46,7 +46,7 @@ DbInfo.openAddDbInfo = function () {
         area: ['800px', '500px'], //宽高
         fix: false, //不固定
         maxmin: true,
-        content: '/databaseInfo/add'
+        content: Root.ctxPath + '/databaseInfo/add'
     });
     this.layerIndex = index;
 };
@@ -62,7 +62,7 @@ DbInfo.openDbInfoDetail = function () {
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: '/databaseInfo/edit/' + DbInfo.seItem.id
+            content: Root.ctxPath + '/databaseInfo/edit/' + DbInfo.seItem.id
         });
         this.layerIndex = index;
     }
@@ -73,7 +73,7 @@ DbInfo.openDbInfoDetail = function () {
  */
 DbInfo.delete = function () {
     if (this.check()) {
-        var ajax = new $ax("/databaseInfo/remove", function (data) {
+        var ajax = new $ax(Root.ctxPath + "/databaseInfo/remove", function (data) {
             Root.success("删除成功!");
             DbInfo.table.refresh();
         }, function (data) {
@@ -100,7 +100,7 @@ DbInfo.search = function () {
 
 $(function () {
     var defaultColunms = DbInfo.initColumn();
-    var table = new BSTable(DbInfo.id, "/databaseInfo/list", defaultColunms);
+    var table = new BSTable(DbInfo.id, Root.ctxPath + "/databaseInfo/list", defaultColunms);
     table.setPaginationType("server");
     table.setQueryParams(DbInfo.formParams());
     DbInfo.table = table.init();

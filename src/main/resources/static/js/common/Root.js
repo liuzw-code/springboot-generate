@@ -1,5 +1,5 @@
 var Root = {
-    ctxPath: "",
+    ctxPath: "/generate",
     confirm: function (tip, ensure) {//询问框
         parent.layer.confirm(tip, {
             btn: ['确定', '取消']

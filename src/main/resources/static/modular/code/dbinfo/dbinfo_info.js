@@ -97,7 +97,7 @@ DbInfoInfoDlg.addSubmit = function () {
         return;
     }
     //提交信息
-    var ajax = new $ax("/databaseInfo/add", function (data) {
+    var ajax = new $ax(Root.ctxPath + "/databaseInfo/add", function (data) {
         Root.success("添加成功!");
         window.parent.DbInfo.table.refresh();
         DbInfoInfoDlg.close();
@@ -121,7 +121,7 @@ DbInfoInfoDlg.editSubmit = function () {
     }
 
     //提交信息
-    var ajax = new $ax("/databaseInfo/edit", function (data) {
+    var ajax = new $ax(Root.ctxPath + "/databaseInfo/edit", function (data) {
         Root.success("修改成功!");
         window.parent.DbInfo.table.refresh();
         DbInfoInfoDlg.close();

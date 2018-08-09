@@ -138,7 +138,7 @@ GenInfo.genCode = function () {
     GenInfo.param.databaseId = $("#databaseId").val();
     //本地生产就ajax访问后台就可以了
     if (GenInfo.param.params.localPath) {
-        var ajax = new $ax("/gen/genCode", function (data) {
+        var ajax = new $ax(Root.ctxPath + "/gen/genCode", function (data) {
             if (data.code === 1) {
                 Root.success("代码生成成功!");
             }
@@ -154,7 +154,7 @@ GenInfo.genCode = function () {
         params += "&author=" + $("#author").val();
         params += "&packageName=" + $("#packageName").val();
         params += "&copyright=" + $("#copyright").val();
-        window.location.href = '/gen/downloadCode?' + params;
+        window.location.href = Root.ctxPath + '/gen/downloadCode?' + params;
     }
 
 };

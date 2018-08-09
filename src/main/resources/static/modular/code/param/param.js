@@ -99,7 +99,7 @@ Param.search = function () {
 };
 
 $(function () {
-    var table = new BSTable(Param.id, "/params/list", Param.initColumn());
+    var table = new BSTable(Param.id, Root.ctxPath + "/params/list", Param.initColumn());
     table.setPaginationType("server");
     table.setQueryParams(Param.formParams());
     Param.table = table.init();

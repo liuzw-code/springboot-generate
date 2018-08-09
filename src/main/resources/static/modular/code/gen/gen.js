@@ -52,7 +52,7 @@ Gen.openGen = function () {
             area: ['100%', '100%'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: "/gen/gen/" + $("#genId").val() + "/" + tableNames
+            content: Root.ctxPath + "/gen/gen/" + $("#genId").val() + "/" + tableNames
         });
         this.layerIndex = index;
     }
@@ -74,7 +74,7 @@ Gen.search = function () {
 };
 
 $(function () {
-    var table = new BSTable(Gen.id, "/gen/list", Gen.initColumn());
+    var table = new BSTable(Gen.id, Root.ctxPath + "/gen/list", Gen.initColumn());
     table.setPaginationType("server");
     table.setQueryParams({"id":$("#genId").val()});
     Gen.table = table.init();

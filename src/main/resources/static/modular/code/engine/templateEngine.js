@@ -101,7 +101,7 @@ TemplateEngine.search = function () {
 
 $(function () {
     var defaultColunms = TemplateEngine.initColumn();
-    var table = new BSTable(TemplateEngine.id, "/templateEngine/list", defaultColunms);
+    var table = new BSTable(TemplateEngine.id, Root.ctxPath + "/templateEngine/list", defaultColunms);
     table.setPaginationType("server");
     table.setQueryParams(TemplateEngine.formParams());
     TemplateEngine.table = table.init();
