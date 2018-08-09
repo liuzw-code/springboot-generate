@@ -78,7 +78,9 @@
 
 * 模板中的参数
 
-   生成模板的所有参数的类`BasicDataBean`
+   生成模板的所有参数的类`BasicDataBean`, 在模板中使用的时候参数为 `data`
+   如：获取表名, Freemarker写法: `${data.tableName}`
+      获取第一个字段的数据库字段名, Freemarker写法: `${data.columns[0].columnName}`
 
 
     |     参数      |   类型  |  说明           |
