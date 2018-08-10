@@ -22,6 +22,11 @@ var TemplateInfoDlg = {
                 notEmpty: {
                     message: '模板文件名不能为空'
                 },
+                regexp: {
+                    /* 只需加此键值对，包含正则表达式，和提示 */
+                    regexp: /^[a-zA-Z]+[.][a-zA-Z]+$/,
+                    message: '必须以字母开头,有且只能有一个. 格式类似于：service.java'
+                },
                 stringLength: {
                     /*长度提示*/
                     min: 3,
@@ -37,8 +42,8 @@ var TemplateInfoDlg = {
                 },
                 regexp: {
                     /* 只需加此键值对，包含正则表达式，和提示 */
-                    regexp: /^[a-zA-Z\.]+$/,
-                    message: '只能是字母和.'
+                    regexp: /^([a-zA-Z][a-zA-Z]*[.])*([a-zA-Z][a-zA-Z]*)$/,
+                    message: '必须以字母开头并且包含字母或者.'
                 },
                 stringLength: {
                     /*长度提示*/
