@@ -68,13 +68,6 @@ public class DataSourceConfiguration {
     }
 
 
-    /**
-     * 配置事务管理，如果使用到事务需要注入该 Bean，否则事务不会生效
-     * 在需要的地方加上 @Transactional 注解即可
-     *
-     * @return the platform transaction manager
-     */
-
     @Bean(name = "sqlSessionTemplate")
     public SqlSessionTemplate sqlSessionTemplate(
             @Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory)
