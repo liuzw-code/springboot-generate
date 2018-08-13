@@ -81,4 +81,9 @@ public class TemplateBean {
     private String updateTime;
 
 
+    /**
+     * 类名
+     */
+    private String className;
+
 }

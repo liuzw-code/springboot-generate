@@ -53,6 +53,7 @@ public class FreeMarkerParseImpl implements Parse {
                 paramsMap.put("data", bean);
                 t.process(paramsMap, write);
                 template.setTemplateContent(write.toString());
+                template.setClassName(bean.getClassName());
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
