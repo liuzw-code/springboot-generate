@@ -44,7 +44,18 @@ public class Page<T> {
      * @param data List<T>
      */
     public Page(List<T> data) {
-        this(data, 8);
+        if (data instanceof com.github.pagehelper.Page) {
+            com.github.pagehelper.Page page = (com.github.pagehelper.Page) data;
+            this.pageNum = page.getPageNum();
+            this.pageSize = page.getPageSize();
+            this.total = page.getTotal();
+            this.data = data;
+        } else {
+            this.pageNum = 1;
+            this.pageSize = data.size();
+            this.total = (long) data.size();
+            this.data = data;
+        }
     }
 
     /**
@@ -52,7 +63,7 @@ public class Page<T> {
      *
      * @param data List<T>
      */
-    private Page(List<T> data, int navigatePages) {
+    public Page(List<T> data, int navigatePages) {
         PageInfo<T> pageInfo = new PageInfo<>(data, navigatePages);
         this.pageNum = pageInfo.getPageNum();
         this.pageSize = pageInfo.getPageSize();
