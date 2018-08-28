@@ -54,7 +54,7 @@ public class GenCodeServiceImpl implements GenCodeService {
         DynamicDataSourceContextHolder.setDataSourceKey("default");
         //1.获取模板内容
         List<TemplateBean> templateList = templateMapper.getTemplateComment(bean.getTemplateIds());
-        if (templateList == null || templateList.size() == 0) {
+        if (templateList == null || templateList.isEmpty()) {
             return false;
         }
         //切换数据源，查询选择的表的信息
@@ -85,10 +85,14 @@ public class GenCodeServiceImpl implements GenCodeService {
         //代码生成到本地路径
         String localPath = bean.getParams().getLocalPath();
 
-        if (StringUtils.isNotEmpty(localPath) && response == null && isWindows()) {
+        Boolean flag = StringUtils.isNotEmpty(localPath) && isWindows();
+
+        if (flag) {
             writeThisFileList(localPath, list, basicData.getPackageName());
         } else {
-            downThisFileList(response, list, basicData.getPackageName());
+            if (response != null) {
+                downThisFileList(response, list, basicData.getPackageName());
+            }
         }
 
         return true;
@@ -131,10 +135,8 @@ public class GenCodeServiceImpl implements GenCodeService {
 
             File path = new File(filePath + File.separator);
 
-            if (!path.exists()) {
-                if (path.mkdirs()) {
-                    log.info("---------->创建文件路径成功");
-                }
+            if (!path.exists() && path.mkdirs()) {
+                log.info("---------->创建文件路径成功");
             }
 
             //文件路径
@@ -155,11 +157,9 @@ public class GenCodeServiceImpl implements GenCodeService {
      * 下载代码
      */
     private void downThisFileList(HttpServletResponse res, List<TemplateBean> templateList, String packageName) {
-        ZipOutputStream out = null;
-        try {
+        try (ZipOutputStream out = new ZipOutputStream(res.getOutputStream())) {
             res.setContentType("application/octet-stream");
             res.setHeader("Content-Disposition", "attachment;filename=code.zip");
-            out = new ZipOutputStream(res.getOutputStream());
             for (TemplateBean templateBean : templateList) {
                 out.putNextEntry(new ZipEntry(getPackagePath(templateBean, packageName) + File.separator + getFileName(templateBean)));
                 out.write(templateBean.getTemplateContent().getBytes(), 0, templateBean.getTemplateContent().getBytes().length);
@@ -167,16 +167,6 @@ public class GenCodeServiceImpl implements GenCodeService {
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-                res.getOutputStream().flush();
-                res.getOutputStream().close();
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-            }
         }
     }
 

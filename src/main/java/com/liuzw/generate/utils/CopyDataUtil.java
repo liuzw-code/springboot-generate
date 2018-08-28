@@ -1,7 +1,10 @@
 package com.liuzw.generate.utils;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,7 +12,10 @@ import java.util.List;
  *
  * @author liuzw
  */
+@Slf4j
 public class CopyDataUtil {
+
+    private CopyDataUtil(){}
 
     public static <T, V> V copyObject(T source, Class<V> clazz) {
         if (source == null) {
@@ -20,7 +26,7 @@ public class CopyDataUtil {
             newObj = clazz.newInstance();
             org.springframework.beans.BeanUtils.copyProperties(source, newObj);
         } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+           log.error("", e);
         }
         return newObj;
     }
@@ -35,11 +41,11 @@ public class CopyDataUtil {
                     data.add(dto);
                 }
             } catch (IllegalAccessException | InstantiationException e) {
-                e.printStackTrace();
+                log.error("", e);
             }
             return data;
         } else {
-            return null;
+            return Collections.emptyList();
         }
     }
 

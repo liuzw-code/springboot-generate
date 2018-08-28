@@ -7,6 +7,8 @@ package com.liuzw.generate.constants;
  */
 public class ResultDataConstants {
 
+    private ResultDataConstants() {}
+
     /**
      * 成功
      */

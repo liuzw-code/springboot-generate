@@ -70,8 +70,7 @@ public class DataSourceConfiguration {
 
     @Bean(name = "sqlSessionTemplate")
     public SqlSessionTemplate sqlSessionTemplate(
-            @Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory)
-            throws Exception {
+            @Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 

@@ -11,6 +11,8 @@ import com.liuzw.generate.parse.impl.FreeMarkerParseImpl;
  */
 public class ParseFactory {
 
+    private ParseFactory() {}
+
     /**
      * 获取解析模板类
      *

@@ -8,6 +8,8 @@ package com.liuzw.generate.config;
 
 public class DynamicDataSourceContextHolder {
 
+    private DynamicDataSourceContextHolder(){}
+
     /**
      * 维护每个线程的变量，以避免影响其他线程
      */

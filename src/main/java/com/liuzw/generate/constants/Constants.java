@@ -7,6 +7,7 @@ package com.liuzw.generate.constants;
  */
 public class Constants {
 
+    private Constants(){}
 
     /**
      * 模板名称已存在

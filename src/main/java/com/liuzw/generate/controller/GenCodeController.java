@@ -59,7 +59,7 @@ public class GenCodeController extends BaseController {
     public String genDetail(Model model,
                             @PathVariable("databaseId") Long databaseId,
                             @PathVariable("tableNames") String tableNames) {
-        tableNames = tableNames.substring(0, tableNames.lastIndexOf(","));
+        tableNames = tableNames.substring(0, tableNames.lastIndexOf(','));
         model.addAttribute("tableNames", tableNames);
         model.addAttribute("databaseId", databaseId);
         model.addAttribute("group", templateGroupService.getList());

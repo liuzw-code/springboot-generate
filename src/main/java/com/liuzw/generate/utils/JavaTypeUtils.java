@@ -1,5 +1,6 @@
 package com.liuzw.generate.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -11,7 +12,10 @@ import java.util.Properties;
  *
  * @author liuzw
  */
+@Slf4j
 public class JavaTypeUtils {
+
+	private JavaTypeUtils(){}
 
 	private static Properties config;
 
@@ -23,7 +27,7 @@ public class JavaTypeUtils {
 			config.load(in);
 			in.close();
 		} catch (IOException e) {
-			System.out.println("No AreaPhone.properties defined error");
+			log.error("No AreaPhone.properties defined error");
 		}
 	}
 
@@ -39,8 +43,7 @@ public class JavaTypeUtils {
 			String val = config.getProperty(key.toUpperCase());
 			return StringUtils.isNotEmpty(val) ? val.trim() : "";
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("ConfigInfoError" + e.toString());
+			log.error("ConfigInfoError ",e);
 			return null;
 		}
 	}
