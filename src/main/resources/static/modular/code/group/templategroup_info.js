@@ -55,7 +55,7 @@ TemplateGroupInfoDlg.get = function (key) {
  * 关闭此对话框
  */
 TemplateGroupInfoDlg.close = function () {
-    parent.layer.close(window.parent.TemplateEngine.layerIndex);
+    parent.layer.close(window.parent.TemplateGroup.layerIndex);
 };
 
 /**
@@ -88,7 +88,7 @@ TemplateGroupInfoDlg.addSubmit = function () {
     //提交信息
     var ajax = new $ax(Root.ctxPath + "/templateGroup/add", function (data) {
         Root.success("添加成功!");
-        window.parent.TemplateEngine.table.refresh();
+        window.parent.TemplateGroup.table.refresh();
         TemplateGroupInfoDlg.close();
     }, function (data) {
         Root.error("添加失败!" + data.message + "!");
@@ -111,7 +111,7 @@ TemplateGroupInfoDlg.editSubmit = function () {
     //提交信息
     var ajax = new $ax(Root.ctxPath + "/templateGroup/edit", function (data) {
         Root.success("修改成功!");
-        window.parent.TemplateEngine.table.refresh();
+        window.parent.TemplateGroup.table.refresh();
         TemplateGroupInfoDlg.close();
     }, function (data) {
         Root.error("修改失败!" + data.message + "!");

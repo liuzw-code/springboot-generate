@@ -98,7 +98,7 @@ GenParamInfoDlg.collectData = function () {
  * 验证数据
  */
 GenParamInfoDlg.validate = function () {
-    $('#paramsForm').data("bootstrapValidator").resetForm(true);
+    $('#paramsForm').data("bootstrapValidator").resetForm();
     $('#paramsForm').bootstrapValidator('validate');
     return $("#paramsForm").data('bootstrapValidator').isValid();
 };
@@ -107,8 +107,6 @@ GenParamInfoDlg.validate = function () {
  * 提交添加
  */
 GenParamInfoDlg.addSubmit = function () {
-
-    this.clearData();
     this.collectData();
     if (!this.validate()) {
         return;
