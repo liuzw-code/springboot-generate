@@ -17,7 +17,7 @@ public class IndexController {
     /**
      * 跳转到 首页 页面
      */
-    @GetMapping(value = {"/", "/index"})
+    @GetMapping("/")
     public String index() {
         return "index";
     }
