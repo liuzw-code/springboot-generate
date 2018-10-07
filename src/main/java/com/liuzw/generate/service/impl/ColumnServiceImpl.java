@@ -41,5 +41,10 @@ public class ColumnServiceImpl implements ColumnService {
         return columnMapper.getList(bean.getTableName());
     }
 
+    @Override
+    public List<TableBean> getTableInfoByTableName(List<String> tableNames) {
+        return columnMapper.getTableInfoByTableName(tableNames);
+    }
+
 
 }

@@ -24,6 +24,11 @@ public class BasicDataBean {
 	private String tableName;
 
 	/**
+	 * 表备注
+	 */
+	private String tableComment;
+
+	/**
 	 * 类名
 	 */
 	private String className;

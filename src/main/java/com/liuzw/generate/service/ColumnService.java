@@ -36,4 +36,14 @@ public interface ColumnService {
 	 */
 	List<TableBean> getList(GenQueryBean bean);
 
+
+	/**
+	 * 获取数据库中的表的备注
+	 *
+	 * @param tableNames 表名
+	 * @return List
+	 */
+	List<TableBean> getTableInfoByTableName(List<String> tableNames);
+
+
 }

@@ -46,5 +46,15 @@
         order by create_time desc
     </select>
 
+    <select id="getTableInfoByTableName" resultType="com.liuzw.generate.bean.TableBean">
+        select table_name tableName,table_comment tableComment
+        from information_schema.tables
+        where table_schema = (select database())
+        and upper(table_name) in
+        <foreach collection="tableNames" item="tableName" separator="," open="(" close=")">
+            upper(#{tableName, jdbcType=VARCHAR})
+        </foreach>
+        order by create_time desc
+    </select>
 
 </mapper>

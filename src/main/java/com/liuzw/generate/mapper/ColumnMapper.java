@@ -36,5 +36,13 @@ public interface ColumnMapper {
 	 */
 	List<TableBean> getList(@Param("tableName") String tableName);
 
+	/**
+	 * 获取数据库中的表的备注
+	 *
+	 * @param tableNames 表名
+	 * @return List
+	 */
+	List<TableBean> getTableInfoByTableName(@Param("tableNames") List<String> tableNames);
+
 
 }

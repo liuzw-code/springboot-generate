@@ -1,9 +1,6 @@
 package com.liuzw.generate.service.impl;
 
-import com.liuzw.generate.bean.BasicDataBean;
-import com.liuzw.generate.bean.ColumnBean;
-import com.liuzw.generate.bean.GenCodeBean;
-import com.liuzw.generate.bean.TemplateBean;
+import com.liuzw.generate.bean.*;
 import com.liuzw.generate.config.DynamicDataSourceContextHolder;
 import com.liuzw.generate.enums.TemplateEnum;
 import com.liuzw.generate.mapper.TemplateMapper;
@@ -23,6 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -67,6 +66,13 @@ public class GenCodeServiceImpl implements GenCodeService {
         getList(columns);
         //获取表的主键
         List<ColumnBean> pkColumns = columnService.getTablePkColumns(tableNames);
+
+        //获取表的备注信息
+        List<TableBean> tableInfoList = columnService.getTableInfoByTableName(tableNames);
+
+        Map<String, String> tableInfoMap = tableInfoList.stream().collect(Collectors.toMap(
+                TableBean::getTableName, TableBean::getTableComment));
+
         //处理数据
         getList(pkColumns);
 
@@ -78,6 +84,7 @@ public class GenCodeServiceImpl implements GenCodeService {
             basicData.setTableName(tableName);
             basicData.setClassName(StringUtility.getCamelCaseString(tableName, true, true));
             basicData.setClassVarName(StringUtility.getCamelCaseString(tableName, false, true));
+            basicData.setTableComment(tableInfoMap.get(tableName));
             //获取解析后的模板内容
             list.addAll(getTemplateComment(basicData, templateList, TemplateEnum.FREEMARKER));
         }
