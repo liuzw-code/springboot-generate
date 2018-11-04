@@ -44,9 +44,10 @@
                     queryParamsType: 'limit', 	//默认值为 'limit' ,在默认情况下 传给服务端的参数为：offset,limit,sort
                     // 向后台传递的自定义参数
                     queryParams: function (param) {
+                        console.log(param)
                         var v = {
                             pageSize: param.limit,
-                            pageNum: param.offset
+                            pageNum: (param.offset /  param.limit) + 1
                         };
                         return $.extend(me.queryParams, v);
                     },
