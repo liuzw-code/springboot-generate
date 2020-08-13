@@ -19,7 +19,7 @@
 ### 使用
 
     下载项目SpringBoot-generate(https://github.com/liu1235/springboot-generate.git)
-    然后运行GenerateApplication.运行成功之后访问：http://localhost:8888/
+    然后运行GenerateApplication.运行成功之后访问：http://localhost:8030/generate
 
    * 进入主页之后，首先配置数据库连接。
 
