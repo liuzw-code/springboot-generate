@@ -31,8 +31,7 @@ CREATE TABLE IF NOT EXISTS `t_code_database_info` (
 -- 正在导出表  gen_code.t_code_database_info 的数据：~2 rows (大约)
 /*!40000 ALTER TABLE `t_code_database_info` DISABLE KEYS */;
 INSERT INTO `t_code_database_info` (`id`, `name`, `db_driver`, `db_url`, `db_username`, `db_password`, `db_type`, `create_time`, `update_time`) VALUES
-	(1, 'liuzw', 'com.mysql.jdbc.Driver', 'jdbc:mysql://127.0.0.1:3306/liuzw', 'root', '123456', 1, '2018-08-03 11:45:05', '2018-08-06 20:57:36'),
-	(2, 'ota', 'com.mysql.jdbc.Driver', 'jdbc:mysql://127.0.0.1:3306/ota', 'root', '123456', 1, '2018-08-03 11:45:05', '2018-08-06 20:57:43');
+	(1, 'liuzw', 'com.mysql.jdbc.Driver', 'jdbc:mysql://127.0.0.1:3306/liuzw', 'root', '123456', 1, '2018-08-03 11:45:05', '2018-08-06 20:57:36');
 /*!40000 ALTER TABLE `t_code_database_info` ENABLE KEYS */;
 
 
@@ -52,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `t_code_params` (
 -- 正在导出表  gen_code.t_code_params 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `t_code_params` DISABLE KEYS */;
 INSERT INTO `t_code_params` (`id`, `name`, `author`, `package_name`, `local_path`, `copyright`, `create_time`, `update_time`) VALUES
-	(1, '刘泽伟', 'liuzw', 'com.liuzw.xxx', '', '/**\n * Copyright (c) 2018 ABC.Co.Ltd. All rights reserved.\n */', '2018-08-03 23:47:00', '2018-08-08 20:22:44');
+	(1, 'liuzw', 'liuzw', 'com.liuzw.xxx', '', '/**\n * Copyright (c) 2018 ABC.Co.Ltd. All rights reserved.\n */', '2018-08-03 23:47:00', '2018-08-08 20:22:44');
 /*!40000 ALTER TABLE `t_code_params` ENABLE KEYS */;
 
 
@@ -117,8 +116,7 @@ CREATE TABLE IF NOT EXISTS `t_code_template_group` (
 -- 正在导出表  gen_code.t_code_template_group 的数据：~2 rows (大约)
 /*!40000 ALTER TABLE `t_code_template_group` DISABLE KEYS */;
 INSERT INTO `t_code_template_group` (`id`, `group_name`, `group_desc`, `create_time`, `update_time`) VALUES
-	(3, 'test', 'test', '2018-08-04 20:55:11', '2018-08-04 20:55:11'),
-	(4, 'liuzw', 'liuzw', '2018-08-04 20:55:26', '2018-08-04 20:55:26');
+	(3, 'test', 'test', '2018-08-04 20:55:11', '2018-08-04 20:55:11');
 /*!40000 ALTER TABLE `t_code_template_group` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
